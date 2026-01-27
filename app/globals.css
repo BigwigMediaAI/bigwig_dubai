@@ -24,3 +24,15 @@
   --success: #22c55e;
   --error: #ef4444;
 }
+
+@keyframes glow-move {
+  0% {
+    transform: translate(-20%, -20%);
+  }
+  50% {
+    transform: translate(20%, 20%);
+  }
+  100% {
+    transform: translate(-20%, -20%);
+  }
+}

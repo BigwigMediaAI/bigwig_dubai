@@ -30,7 +30,7 @@ export default function About() {
             {/* Image glow */}
             <div className="absolute -inset-6 rounded-3xl bg-[var(--accent-primary)]/20 blur-2xl" />
 
-            <div className="relative overflow-hidden rounded-3xl border border-[var(--border-light)]">
+            <div className="relative overflow-hidden rounded-tl-4xl rounded-br-4xl border border-[var(--border-light)]">
               <Image
                 src="/about.png"
                 alt="Digital marketing team in Dubai"
@@ -50,7 +50,18 @@ export default function About() {
             <h2 className="mb-6 text-3xl md:text-5xl font-bold leading-tight">
               A Digital Marketing Agency <br />
               Built for{" "}
-              <span className="text-[var(--accent-primary)]">
+              <span
+                className="
+    bg-gradient-to-r
+    from-[var(--accent-primary)]
+    via-[#FFD88A]
+    to-[var(--accent-glow)]
+    bg-clip-text
+    text-transparent
+    drop-shadow-[0_0_12px_rgba(255,200,100,0.35)]
+  "
+              >
+                {" "}
                 Dubai’s Competitive Market
               </span>
             </h2>
