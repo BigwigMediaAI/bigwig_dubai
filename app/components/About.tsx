@@ -68,7 +68,7 @@ export default function About() {
             </p>
 
             {/* STATS */}
-            <div className="grid grid-cols-2 gap-6 mb-10">
+            {/* <div className="grid grid-cols-2 gap-6 mb-10">
               {[
                 { value: "250+", label: "Projects Delivered" },
                 { value: "4.9★", label: "Client Satisfaction" },
@@ -84,7 +84,7 @@ export default function About() {
                   </p>
                 </div>
               ))}
-            </div>
+            </div> */}
 
             {/* CTA */}
             <Button text="Learn More About Us" href="#services" />

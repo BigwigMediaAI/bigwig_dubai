@@ -45,7 +45,7 @@ export default function Hero() {
               <Button
                 text="View Services"
                 href="#services"
-                className="bg-transparent border border-[var(--border-light)] text-[var(--text-primary)] hover:bg-[var(--accent-primary)] hover:text-black"
+                className="bg-transparent border border-[var(--border-light)] text-[var(--text-primary)] "
               />
             </div>
           </div>

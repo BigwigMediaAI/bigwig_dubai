@@ -29,108 +29,112 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 z-50 w-full transition-all duration-300
-        ${
+        `}
+    >
+      <div
+        className={`${
           scrolled
             ? "bg-[var(--bg-glass)] backdrop-blur-xl border-b border-[var(--border-light)]"
             : "bg-transparent"
         }`}
-    >
-      {/* NAVBAR */}
-      <nav className="mx-auto grid max-w-7xl grid-cols-[auto_1fr_auto] items-center px-6 py-4">
-        {/* LEFT: LOGO (auto width) */}
-        <Link href="/" className="flex items-center">
-          <Image
-            src="/bigwig-logo.png"
-            alt="Bigwig Logo"
-            width={140}
-            height={44}
-            priority
-          />
-        </Link>
+      >
+        {/* NAVBAR */}
+        <nav className="mx-auto grid max-w-7xl grid-cols-[auto_1fr_auto] items-center px-6 py-4">
+          {/* LEFT: LOGO (auto width) */}
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/bigwig-logo.png"
+              alt="Bigwig Logo"
+              width={140}
+              height={44}
+              priority
+            />
+          </Link>
 
-        {/* CENTER: MENU (takes remaining width) */}
-        <div className="hidden lg:flex justify-center">
-          <ul className="flex items-center gap-12 rounded-full px-12 border border-[var(--border-light)] mx-auto">
-            <li>
-              <Link
-                href="#about"
-                className="text-base font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition"
+          {/* CENTER: MENU (takes remaining width) */}
+          <div className="hidden lg:flex justify-center">
+            <ul className="flex items-center gap-12 rounded-full px-12 border border-[var(--border-light)] mx-auto">
+              <li>
+                <Link
+                  href="#about"
+                  className="text-base font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition"
+                >
+                  About
+                </Link>
+              </li>
+
+              {/* SERVICES DROPDOWN */}
+              <li
+                className="relative"
+                onMouseEnter={() => setServicesOpen(true)}
+                onMouseLeave={() => setServicesOpen(false)}
               >
-                About
-              </Link>
-            </li>
+                <button className="flex items-center py-3 gap-1 text-base font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition">
+                  Services <ChevronDown size={16} />
+                </button>
 
-            {/* SERVICES DROPDOWN */}
-            <li
-              className="relative"
-              onMouseEnter={() => setServicesOpen(true)}
-              onMouseLeave={() => setServicesOpen(false)}
-            >
-              <button className="flex items-center py-3 gap-1 text-base font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition">
-                Services <ChevronDown size={16} />
-              </button>
+                {servicesOpen && (
+                  <div className="absolute top-full left-1/2  w-64 -translate-x-1/2 rounded-xl bg-[var(--bg-glass)] backdrop-blur-xl border border-[var(--border-light)] shadow-xl">
+                    <ul className="p-2">
+                      {services.map((service) => (
+                        <li key={service.name}>
+                          <Link
+                            href={service.href}
+                            className="block rounded-lg px-4 py-2.5 text-sm text-[var(--text-secondary)] hover:bg-white/5 hover:text-[var(--text-primary)] transition"
+                          >
+                            {service.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </li>
 
-              {servicesOpen && (
-                <div className="absolute top-full left-1/2  w-64 -translate-x-1/2 rounded-xl bg-[var(--bg-glass)] backdrop-blur-xl border border-[var(--border-light)] shadow-xl">
-                  <ul className="p-2">
-                    {services.map((service) => (
-                      <li key={service.name}>
-                        <Link
-                          href={service.href}
-                          className="block rounded-lg px-4 py-2.5 text-sm text-[var(--text-secondary)] hover:bg-white/5 hover:text-[var(--text-primary)] transition"
-                        >
-                          {service.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </li>
+              <li>
+                <Link
+                  href="#clients"
+                  className="text-base font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition"
+                >
+                  Clients
+                </Link>
+              </li>
 
-            <li>
-              <Link
-                href="#clients"
-                className="text-base font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition"
-              >
-                Clients
-              </Link>
-            </li>
+              <li>
+                <Link
+                  href="#blog"
+                  className="text-base font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition"
+                >
+                  Blog
+                </Link>
+              </li>
 
-            <li>
-              <Link
-                href="#blog"
-                className="text-base font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition"
-              >
-                Blog
-              </Link>
-            </li>
+              <li>
+                <Link
+                  href="#contact"
+                  className="text-base font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition"
+                >
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
 
-            <li>
-              <Link
-                href="#contact"
-                className="text-base font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition"
-              >
-                Contact
-              </Link>
-            </li>
-          </ul>
-        </div>
+          {/* RIGHT: CTA (auto width) */}
+          <div className="hidden lg:flex">
+            <Button text="Get In Touch" href="#contact" />
+          </div>
 
-        {/* RIGHT: CTA (auto width) */}
-        <div className="hidden lg:flex">
-          <Button text="Get In Touch" href="#contact" />
-        </div>
-
-        {/* MOBILE MENU BUTTON */}
-        <button
-          className="lg:hidden justify-self-end text-[var(--text-primary)]"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle Menu"
-        >
-          {menuOpen ? <X size={26} /> : <Menu size={26} />}
-        </button>
-      </nav>
+          {/* MOBILE MENU BUTTON */}
+          <button
+            className="lg:hidden justify-self-end text-[var(--text-primary)]"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle Menu"
+          >
+            {menuOpen ? <X size={26} /> : <Menu size={26} />}
+          </button>
+        </nav>
+      </div>
 
       {/* MOBILE MENU */}
       {/* MOBILE MENU OVERLAY */}
