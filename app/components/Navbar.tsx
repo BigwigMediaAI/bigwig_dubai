@@ -111,7 +111,7 @@ export default function Navbar() {
 
               <li>
                 <Link
-                  href="/contact"
+                  href="#contact"
                   className="text-base font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition"
                 >
                   Contact
@@ -199,7 +199,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="/contact"
+            href="#contact"
             onClick={() => setMenuOpen(false)}
             className="block text-lg font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
           >
