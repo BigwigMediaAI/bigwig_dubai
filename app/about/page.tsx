@@ -14,7 +14,6 @@ export default function AboutPage() {
     <div className="relative ">
       {/* NAVBAR */}
       <Navbar />
-
       {/* HERO SECTION */}
       <section className="relative h-[90vh] w-full overflow-hidden">
         {/* BACKGROUND IMAGE */}
