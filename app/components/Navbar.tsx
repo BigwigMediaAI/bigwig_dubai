@@ -56,7 +56,7 @@ export default function Navbar() {
             <ul className="flex items-center gap-12 rounded-full px-12 border border-[var(--border-light)] mx-auto">
               <li>
                 <Link
-                  href="#about"
+                  href="/about"
                   className="text-base font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition"
                 >
                   About
@@ -93,7 +93,7 @@ export default function Navbar() {
 
               <li>
                 <Link
-                  href="#clients"
+                  href="/clients"
                   className="text-base font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition"
                 >
                   Clients
@@ -102,7 +102,7 @@ export default function Navbar() {
 
               <li>
                 <Link
-                  href="#blog"
+                  href="/blog"
                   className="text-base font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition"
                 >
                   Blog
@@ -111,7 +111,7 @@ export default function Navbar() {
 
               <li>
                 <Link
-                  href="#contact"
+                  href="/contact"
                   className="text-base font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition"
                 >
                   Contact
@@ -166,7 +166,7 @@ export default function Navbar() {
 
         <div className="px-6 py-6 space-y-6">
           <Link
-            href="#about"
+            href="/about"
             onClick={() => setMenuOpen(false)}
             className="block text-lg font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
           >
@@ -175,7 +175,7 @@ export default function Navbar() {
 
           {/* SERVICES (SINGLE ITEM ONLY) */}
           <Link
-            href="#services"
+            href="/services"
             onClick={() => setMenuOpen(false)}
             className="block text-lg font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
           >
@@ -183,7 +183,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="#clients"
+            href="/clients"
             onClick={() => setMenuOpen(false)}
             className="block text-lg font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
           >
@@ -191,7 +191,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="#blog"
+            href="/blog"
             onClick={() => setMenuOpen(false)}
             className="block text-lg font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
           >
@@ -199,7 +199,7 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="#contact"
+            href="/contact"
             onClick={() => setMenuOpen(false)}
             className="block text-lg font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
           >
