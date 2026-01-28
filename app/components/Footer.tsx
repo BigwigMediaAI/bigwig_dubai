@@ -85,22 +85,22 @@ export default function Footer() {
 
             <ul className="space-y-3 text-sm text-[var(--text-secondary)]">
               {[
-                "About Us",
-                "Testimonials",
-                "Our Team",
-                "Blog",
-                "Privacy Policy",
+                { label: "About Us", href: "/about" },
+                { label: "Clients", href: "/clients" },
+                { label: "Blog", href: "/blog" },
+                { label: "Contact", href: "/contact" },
+                { label: "Privacy Policy", href: "/privacy-policy" },
               ].map((item) => (
-                <li key={item}>
+                <li key={item.label}>
                   <Link
-                    href="#"
+                    href={item.href}
                     className="group flex items-center gap-2 text-[var(--text-secondary)] transition hover:text-[var(--accent-primary)]"
                   >
                     <ChevronRight
                       size={14}
                       className="text-[var(--accent-primary)] opacity-70 transition-transform duration-300 group-hover:translate-x-1"
                     />
-                    <span>{item}</span>
+                    <span>{item.label}</span>
                   </Link>
                 </li>
               ))}
