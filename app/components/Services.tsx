@@ -17,7 +17,7 @@ import {
 const services = [
   {
     id: "seo",
-    slug: "seo",
+    slug: "search-engine-optimization",
     name: "SEO & Organic Growth",
     icon: Search,
     title: "Rank Higher. Get Found. Grow Organically.",

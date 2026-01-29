@@ -116,22 +116,37 @@ export default function Footer() {
 
             <ul className="space-y-3 text-sm text-[var(--text-secondary)]">
               {[
-                "SEO Optimization",
-                "Performance Marketing",
-                "Social Media Marketing",
-                "Content Marketing",
-                "Web Development",
+                {
+                  label: "Search Engine Optimization",
+                  href: "/services/search-engine-optimization",
+                },
+                {
+                  label: "Performance Marketing",
+                  href: "/services/performance-marketing",
+                },
+                {
+                  label: "Social Media Marketing",
+                  href: "/services/social-media-marketing",
+                },
+                {
+                  label: "Content Marketing",
+                  href: "/services/content-marketing",
+                },
+                {
+                  label: "Website Development",
+                  href: "/services/website-development",
+                },
               ].map((service) => (
-                <li key={service}>
+                <li key={service.href}>
                   <Link
-                    href="#"
+                    href={service.href}
                     className="group flex items-center gap-2 text-[var(--text-secondary)] transition hover:text-[var(--accent-primary)]"
                   >
                     <ChevronRight
                       size={14}
                       className="text-[var(--accent-primary)] opacity-70 transition-transform duration-300 group-hover:translate-x-1"
                     />
-                    {service}
+                    <span>{service.label}</span>
                   </Link>
                 </li>
               ))}
@@ -171,7 +186,7 @@ export default function Footer() {
       </div>
 
       {/* BOTTOM BAR */}
-      <div className="border-t mb-12 border-white/10 py-5 backdrop-blur">
+      <div className="border-t mb-12 md:mb-0 border-white/10 py-5 backdrop-blur">
         <p className="text-center text-sm text-[var(--text-secondary)]">
           © {new Date().getFullYear()}{" "}
           <span className="text-[var(--accent-primary)] font-medium">

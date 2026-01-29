@@ -2,13 +2,12 @@
 import { useState } from "react";
 
 import Image from "next/image";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import Link from "next/link";
-import GlobalCTA from "../components/Cta";
-import Services from "../components/Services";
+import Navbar from "@/app/components/Navbar";
+import GlobalCTA from "@/app/components/Cta";
+import Footer from "@/app/components/Footer";
 
-export default function ServicePage() {
+export default function PerformanceMarketingPage() {
   return (
     <div className="relative bg-black">
       {/* NAVBAR */}
@@ -40,18 +39,24 @@ export default function ServicePage() {
                 <Link href="/">Home</Link>
               </span>
               <span>/</span>
-              <span className="text-[var(--text-secondary)]">Services</span>
+              <span className="hover:text-[var(--accent-primary)] transition cursor-pointer">
+                <Link href="/services">Services</Link>
+              </span>
+              <span>/</span>
+              <span className="text-[var(--text-secondary)]">
+                Performance Marketing
+              </span>
             </div>
 
             {/* TITLE */}
             <h1
               data-aos="fade-right"
               data-aos-delay="100"
-              className="mb-6 text-4xl md:text-6xl font-bold leading-tight text-[var(--text-primary)]"
+              className="mb-6 text-4xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]"
             >
-              Digital Solutions That <br />
+              Performance Marketing That <br />
               <span className="text-[var(--accent-primary)]">
-                Drive Real Business Growth
+                Delivers Measurable ROI
               </span>
             </h1>
 
@@ -61,16 +66,14 @@ export default function ServicePage() {
               data-aos-delay="300"
               className="max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]"
             >
-              We deliver end-to-end digital services — from strategy and
-              branding to performance marketing and web development — designed
-              to attract, convert, and scale your business in competitive
-              markets.
+              We run data-driven paid campaigns across Google, Meta, and other
+              high-intent platforms — optimizing every stage of the funnel to
+              maximize conversions, reduce acquisition costs, and scale
+              profitable growth.
             </p>
           </div>
         </div>
       </section>
-
-      <Services />
 
       <GlobalCTA />
 

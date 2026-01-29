@@ -8,17 +8,26 @@ import Button from "../components/Button";
 import ServicePopup from "./Popup";
 
 const services = [
-  { name: "SEO", href: "#seo" },
-  { name: "SMM (Social Media Marketing)", href: "#smm" },
-  { name: "Performance Marketing", href: "#performance-marketing" },
-  { name: "Content Marketing", href: "#content-marketing" },
-  { name: "Website Development", href: "#website-development" },
-  { name: "Email Marketing", href: "#email-marketing" },
-  { name: "SMO (Social Media Optimization)", href: "#smo" },
-  { name: "Graphic & Video Design", href: "#graphic-video" },
-  { name: "Affiliate Marketing", href: "#affiliate-marketing" },
-  { name: "Influencer Marketing", href: "#influencer-marketing" },
-  { name: "Online Reputation Management (ORM)", href: "#orm" },
+  {
+    name: "SEO (Search Engine Optimization)",
+    href: "search-engine-optimization",
+  },
+  { name: "SMM (Social Media Marketing)", href: "social-media-marketing" },
+  { name: "Performance Marketing", href: "performance-marketing" },
+  { name: "Content Marketing", href: "content-marketing" },
+  { name: "Website Development", href: "website-development" },
+  { name: "Email Marketing", href: "email-marketing" },
+  {
+    name: "SMO (Social Media Optimization)",
+    href: "social-media-optimization",
+  },
+  { name: "Graphic & Video Design", href: "graphic-video-design" },
+  { name: "Affiliate Marketing", href: "affiliate-marketing" },
+  { name: "Influencer Marketing", href: "influencer-marketing" },
+  {
+    name: "Online Reputation Management (ORM)",
+    href: "online-reputation-management",
+  },
 ];
 
 export default function Navbar() {
@@ -101,7 +110,7 @@ export default function Navbar() {
                       {services.map((service) => (
                         <Link
                           key={service.name}
-                          href={service.href}
+                          href={`/services/${service.href}`}
                           className="
             group
             relative
@@ -116,7 +125,7 @@ export default function Navbar() {
                           {/* HOVER GLOW */}
                           <span className="pointer-events-none absolute inset-0 rounded-2xl bg-[var(--accent-primary)]/10 opacity-0 blur-xl transition group-hover:opacity-100" />
 
-                          <span className="relative z-10 block text-sm font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-primary)] transition">
+                          <span className="relative z-10 block text-sm font-thin  text-[var(--text-primary)] group-hover:text-[var(--accent-primary)] transition">
                             {service.name}
                           </span>
                         </Link>
