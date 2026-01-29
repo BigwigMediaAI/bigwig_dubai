@@ -21,71 +21,163 @@ const services = [
     name: "SEO & Organic Growth",
     icon: Search,
     title: "Rank Higher. Get Found. Grow Organically.",
-    desc: "We build long-term organic visibility through technical SEO, content strategy, and authority building tailored for Dubai’s competitive market.",
+    desc: "We drive sustainable organic growth through technical SEO, content strategy, and authority building tailored for competitive markets.",
     points: [
-      "Local & International SEO",
+      "Local & international SEO",
       "Technical SEO & audits",
       "Content-led ranking strategy",
     ],
     image: "/services/seo.png",
   },
+
   {
-    id: "ads",
+    id: "performance",
     slug: "performance-marketing",
     name: "Performance Marketing",
     icon: TrendingUp,
     title: "High-Intent Traffic That Converts",
-    desc: "Data-driven paid campaigns across Google, Meta, and LinkedIn designed to maximize ROI and scale profitably.",
-    points: ["Google & Meta Ads", "Funnel optimization", "Conversion tracking"],
+    desc: "ROI-focused paid campaigns across Google, Meta, and LinkedIn designed to scale profitably with full-funnel optimization.",
+    points: [
+      "Google, Meta & LinkedIn Ads",
+      "Conversion-focused funnels",
+      "Advanced tracking & optimization",
+    ],
     image: "/services/performance.png",
   },
+
   {
-    id: "social",
+    id: "smm",
     slug: "social-media-marketing",
     name: "Social Media Marketing",
     icon: Share2,
-    title: "Build Brand Authority on Social",
-    desc: "We combine content, creatives, and paid strategies to grow engaged audiences and real business results.",
+    title: "Build Authority & Engagement on Social",
+    desc: "We grow brands through strategic content, community engagement, and paid social campaigns that drive real impact.",
     points: [
-      "Content & reels strategy",
+      "Content & reel strategy",
       "Paid social growth",
-      "Community engagement",
+      "Community management",
     ],
     image: "/services/smm.png",
   },
+
   {
     id: "content",
-    slug: "content-branding",
-    name: "Content & Branding",
+    slug: "content-marketing",
+    name: "Content Marketing",
     icon: PenTool,
-    title: "Content That Builds Trust & Authority",
-    desc: "Strategic content that positions your brand as a leader and drives qualified inbound demand.",
-    points: ["Blogs & landing pages", "Brand messaging", "Authority building"],
+    title: "Content That Builds Trust & Demand",
+    desc: "High-quality content designed to educate, influence, and convert — across blogs, landing pages, and campaigns.",
+    points: [
+      "Blogs & long-form content",
+      "Landing page copy",
+      "Inbound demand generation",
+    ],
     image: "/services/content.png",
   },
+
   {
     id: "web",
-    slug: "web-cro",
-    name: "Web & CRO",
+    slug: "website-development",
+    name: "Website Development",
     icon: Monitor,
-    title: "Websites Built to Convert",
-    desc: "High-performance websites optimized for speed, UX, and conversion rate optimization.",
+    title: "Websites Built for Speed & Conversion",
+    desc: "High-performance websites engineered for UX, speed, scalability, and measurable business results.",
     points: [
-      "Conversion-focused UI",
-      "Landing page optimization",
-      "Analytics & testing",
+      "Custom website development",
+      "Conversion-focused UI/UX",
+      "Performance & analytics setup",
     ],
     image: "/services/web.png",
   },
+
   {
-    id: "automation",
-    slug: "marketing-automation",
-    name: "Marketing Automation",
-    icon: Zap,
-    title: "Scale Faster With Automation",
-    desc: "Automate follow-ups, lead nurturing, and workflows to scale without increasing overhead.",
-    points: ["CRM automation", "Email & WhatsApp flows", "Lead scoring"],
-    image: "/services/marketing.png",
+    id: "email",
+    slug: "email-marketing",
+    name: "Email Marketing",
+    icon: Search,
+    title: "Turn Subscribers Into Customers",
+    desc: "Personalized email campaigns that nurture leads, increase retention, and drive repeat revenue.",
+    points: [
+      "Campaign & newsletter strategy",
+      "Automation & segmentation",
+      "Retention-focused flows",
+    ],
+    image: "/services/email.png",
+  },
+
+  {
+    id: "smo",
+    slug: "social-media-optimization",
+    name: "Social Media Optimization (SMO)",
+    icon: TrendingUp,
+    title: "Optimize Profiles for Visibility & Growth",
+    desc: "We optimize social profiles to increase reach, engagement, and brand credibility across platforms.",
+    points: [
+      "Profile & bio optimization",
+      "Hashtag & posting strategy",
+      "Organic reach improvement",
+    ],
+    image: "/services/smo.png",
+  },
+
+  {
+    id: "design",
+    slug: "graphic-video-design",
+    name: "Graphic & Video Design",
+    icon: Share2,
+    title: "Visuals That Capture Attention",
+    desc: "High-impact creatives designed to stop the scroll and reinforce your brand identity across platforms.",
+    points: [
+      "Brand creatives & ad designs",
+      "Short-form & promo videos",
+      "Social & marketing visuals",
+    ],
+    image: "/services/design.png",
+  },
+
+  {
+    id: "affiliate",
+    slug: "affiliate-marketing",
+    name: "Affiliate Marketing",
+    icon: PenTool,
+    title: "Scale Revenue Through Partnerships",
+    desc: "We help you build and manage affiliate programs that drive consistent, performance-based growth.",
+    points: [
+      "Affiliate program setup",
+      "Partner recruitment",
+      "Tracking & performance optimization",
+    ],
+    image: "/services/affiliate.png",
+  },
+
+  {
+    id: "influencer",
+    slug: "influencer-marketing",
+    name: "Influencer Marketing",
+    icon: Monitor,
+    title: "Influence That Drives Action",
+    desc: "Strategic influencer collaborations that amplify reach, build trust, and generate measurable results.",
+    points: [
+      "Influencer sourcing & vetting",
+      "Campaign execution",
+      "Performance tracking",
+    ],
+    image: "/services/influencer.png",
+  },
+
+  {
+    id: "orm",
+    slug: "online-reputation-management",
+    name: "Online Reputation Management (ORM)",
+    icon: PenTool,
+    title: "Protect & Strengthen Your Brand Image",
+    desc: "We monitor, manage, and improve your online reputation to build long-term trust and credibility.",
+    points: [
+      "Review monitoring & response",
+      "Brand sentiment management",
+      "Crisis & reputation control",
+    ],
+    image: "/services/orm.png",
   },
 ];
 
@@ -118,11 +210,18 @@ export default function Services() {
       <div className="relative z-10 mx-auto w-11/12 md:w-5/6">
         {/* HEADER */}
         <div className="mb-16 max-w-3xl">
-          <p className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)]">
+          <p
+            data-aos="zoom-in"
+            className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)]"
+          >
             Our Services
           </p>
 
-          <h2 className="text-3xl md:text-5xl font-bold text-[var(--text-primary)] leading-tight">
+          <h2
+            data-aos="fade-up"
+            data-aos-delay="150"
+            className="text-3xl md:text-5xl font-bold text-[var(--text-primary)] leading-tight"
+          >
             Everything You Need to{" "}
             <span
               className="
@@ -144,8 +243,8 @@ export default function Services() {
         {/* ===== GRID ===== */}
         <div className="relative grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
           {/* LEFT: SERVICE LIST */}
-          <div className="relative">
-            <div className="max-h-[420px] overflow-y-auto space-y-2 rounded-2xl border border-[var(--border-light)] bg-black/20 p-3 shadow-[inset_0_0_40px_rgba(0,0,0,0.6)] custom-scrollbar">
+          <div data-aos="fade-up" data-aos-delay="250" className="relative">
+            <div className="max-h-[420px] scrollbar-hide overflow-y-auto space-y-2 rounded-2xl border border-[var(--border-light)] bg-black/20 p-3 shadow-[inset_0_0_40px_rgba(0,0,0,0.6)] custom-scrollbar">
               {services.map((service) => {
                 const Icon = service.icon;
                 return (
@@ -182,7 +281,11 @@ export default function Services() {
           <div className="hidden lg:block absolute left-1/3 top-0 h-full w-px bg-gradient-to-b from-transparent via-white/10 to-transparent" />
 
           {/* MIDDLE: CONTENT */}
-          <div className="text-[var(--text-primary)]">
+          <div
+            data-aos="zoom-in"
+            data-aos-delay="350"
+            className="text-[var(--text-primary)]"
+          >
             <ActiveIcon
               size={52}
               className="text-[var(--accent-primary)] mb-5"
@@ -214,7 +317,11 @@ export default function Services() {
 
           {/* RIGHT: IMAGE */}
           <div className="relative hidden lg:block">
-            <div className="relative overflow-hidden rounded-2xl border border-[var(--border-light)]">
+            <div
+              data-aos="zoom-in"
+              data-aos-delay="450"
+              className="relative overflow-hidden rounded-2xl border border-[var(--border-light)]"
+            >
               {/* moving glow */}
 
               <Image

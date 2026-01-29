@@ -171,7 +171,7 @@ export default function Footer() {
       </div>
 
       {/* BOTTOM BAR */}
-      <div className="border-t border-white/10 py-5 backdrop-blur">
+      <div className="border-t mb-12 border-white/10 py-5 backdrop-blur">
         <p className="text-center text-sm text-[var(--text-secondary)]">
           © {new Date().getFullYear()}{" "}
           <span className="text-[var(--accent-primary)] font-medium">

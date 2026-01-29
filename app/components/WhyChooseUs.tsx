@@ -62,11 +62,19 @@ export default function WhyChooseUs() {
       <div className="relative z-10 mx-auto w-11/12 md:w-5/6">
         {/* Heading */}
         <div className="mb-12 max-w-3xl">
-          <p className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur">
+          <p
+            data-aos="zoom-in"
+            data-aos-delay="200"
+            className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur"
+          >
             Why Choose Us
           </p>
 
-          <h2 className="text-3xl md:text-5xl font-bold text-[var(--text-primary)] leading-tight">
+          <h2
+            data-aos="fade-up"
+            data-aos-delay="200"
+            className="text-3xl md:text-5xl font-bold text-[var(--text-primary)] leading-tight"
+          >
             Designed for Brands That <br />
             <span
               className="
@@ -89,6 +97,8 @@ export default function WhyChooseUs() {
           {reasons.map((item, i) => (
             <div
               key={i}
+              data-aos="flip-left"
+              data-aos-delay={i * 150}
               className="
     group relative rounded-2xl
     border border-[var(--border-light)]

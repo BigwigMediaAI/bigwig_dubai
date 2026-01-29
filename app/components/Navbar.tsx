@@ -5,20 +5,27 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Button from "../components/Button";
+import ServicePopup from "./Popup";
 
 const services = [
-  { name: "SEO Optimization", href: "#seo" },
-  { name: "Performance Marketing", href: "#performance" },
-  { name: "Social Media Marketing", href: "#social" },
-  { name: "Content Marketing", href: "#content" },
-  { name: "Web & CRO", href: "#cro" },
-  { name: "Marketing Automation", href: "#automation" },
+  { name: "SEO", href: "#seo" },
+  { name: "SMM (Social Media Marketing)", href: "#smm" },
+  { name: "Performance Marketing", href: "#performance-marketing" },
+  { name: "Content Marketing", href: "#content-marketing" },
+  { name: "Website Development", href: "#website-development" },
+  { name: "Email Marketing", href: "#email-marketing" },
+  { name: "SMO (Social Media Optimization)", href: "#smo" },
+  { name: "Graphic & Video Design", href: "#graphic-video" },
+  { name: "Affiliate Marketing", href: "#affiliate-marketing" },
+  { name: "Influencer Marketing", href: "#influencer-marketing" },
+  { name: "Online Reputation Management (ORM)", href: "#orm" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -70,23 +77,62 @@ export default function Navbar() {
                 onMouseLeave={() => setServicesOpen(false)}
               >
                 <button className="flex items-center py-3 gap-1 text-base font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition">
-                  Services <ChevronDown size={16} />
+                  <Link href="/services">Services</Link>{" "}
+                  <ChevronDown size={16} />
                 </button>
 
                 {servicesOpen && (
-                  <div className="absolute top-full left-1/2  w-64 -translate-x-1/2 rounded-xl bg-[var(--bg-glass)] backdrop-blur-xl border border-[var(--border-light)] shadow-xl">
-                    <ul className="p-2">
+                  <div
+                    className="
+      absolute top-full left-1/2 z-50  w-[720px]
+      -translate-x-1/2
+      rounded-3xl
+      border border-[var(--border-light)]
+      bg-[var(--bg-secondary)]
+      backdrop-blur-2xl
+      shadow-2xl
+    "
+                  >
+                    {/* SOFT GOLD GLOW */}
+                    <div className="pointer-events-none absolute -top-32 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full bg-[var(--accent-primary)]/20 blur-[160px]" />
+
+                    {/* GRID */}
+                    <div className="relative grid grid-cols-4 gap-3 p-4">
                       {services.map((service) => (
-                        <li key={service.name}>
-                          <Link
-                            href={service.href}
-                            className="block rounded-lg px-4 py-2.5 text-sm text-[var(--text-secondary)] hover:bg-white/5 hover:text-[var(--text-primary)] transition"
-                          >
+                        <Link
+                          key={service.name}
+                          href={service.href}
+                          className="
+            group
+            relative
+            rounded-2xl
+            border border-transparent
+            px-4 py-4
+            transition-all duration-300
+            hover:border-[var(--accent-primary)]/40
+            hover:bg-white/5
+          "
+                        >
+                          {/* HOVER GLOW */}
+                          <span className="pointer-events-none absolute inset-0 rounded-2xl bg-[var(--accent-primary)]/10 opacity-0 blur-xl transition group-hover:opacity-100" />
+
+                          <span className="relative z-10 block text-sm font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-primary)] transition">
                             {service.name}
-                          </Link>
-                        </li>
+                          </span>
+                        </Link>
                       ))}
-                    </ul>
+                    </div>
+
+                    {/* FOOTER CTA */}
+                    <div className="border-t border-white/10 px-6 py-4 text-center">
+                      <Link
+                        href="/services"
+                        className="inline-flex items-center gap-2 text-xs font-medium text-[var(--accent-primary)] transition hover:underline"
+                      >
+                        View all services
+                        <span className="text-sm">→</span>
+                      </Link>
+                    </div>
                   </div>
                 )}
               </li>
@@ -111,7 +157,7 @@ export default function Navbar() {
 
               <li>
                 <Link
-                  href="#contact"
+                  href="/contact"
                   className="text-base font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition"
                 >
                   Contact
@@ -122,7 +168,7 @@ export default function Navbar() {
 
           {/* RIGHT: CTA (auto width) */}
           <div className="hidden lg:flex">
-            <Button text="Get In Touch" href="#contact" />
+            <Button onClick={() => setOpen(true)} text="Get In Touch" />
           </div>
 
           {/* MOBILE MENU BUTTON */}
@@ -208,11 +254,12 @@ export default function Navbar() {
 
           <Button
             text="Get In Touch"
-            href="#contact"
+            onClick={() => setOpen(true)}
             className=" justify-center mt-6"
           />
         </div>
       </div>
+      <ServicePopup isOpen={open} onClose={() => setOpen(false)} />
     </header>
   );
 }

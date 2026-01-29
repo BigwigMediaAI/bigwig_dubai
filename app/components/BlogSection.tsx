@@ -59,11 +59,19 @@ export default function BlogSection() {
       <div className="relative z-10 mx-auto w-11/12 md:w-5/6 py-16">
         {/* ================= HEADING ================= */}
         <div className="mb-20 max-w-3xl">
-          <p className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur">
+          <p
+            data-aos="zoom-in"
+            data-aos-delay="150"
+            className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur"
+          >
             Insights & Articles
           </p>
 
-          <h2 className="mb-6 text-3xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]">
+          <h2
+            data-aos="fade-up"
+            data-aos-delay="250"
+            className="mb-6 text-3xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]"
+          >
             Latest Insights on <br />
             <span
               className="
@@ -86,7 +94,11 @@ export default function BlogSection() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* FEATURED BLOG (BIG – 3 ROWS) */}
           {featuredBlog && (
-            <article className="group relative lg:col-span-2 lg:row-span-3 overflow-hidden rounded-2xl border border-[var(--border-light)] bg-black">
+            <article
+              data-aos="zoom-in"
+              data-aos-delay="250"
+              className="group relative lg:col-span-2 lg:row-span-3 overflow-hidden rounded-2xl border border-[var(--border-light)] bg-black"
+            >
               {/* IMAGE */}
               <div className="absolute inset-0">
                 <Image
@@ -124,6 +136,8 @@ export default function BlogSection() {
           {sideBlogs.map((blog) => (
             <article
               key={blog.id}
+              data-aos="flip-left"
+              data-aos-delay={blog.id * 200}
               className="group flex gap-5 rounded-xl border border-[var(--border-light)] bg-[var(--bg-glass)] p-5 backdrop-blur-md"
             >
               <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-lg">

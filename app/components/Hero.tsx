@@ -1,7 +1,12 @@
+"use client";
 import Image from "next/image";
 import Button from "../components/Button";
+import ServicePopup from "./Popup";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function Hero() {
+  const [open, setOpen] = useState(false);
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-[var(--bg-primary)]">
       {/* BACKGROUND IMAGE */}
@@ -21,11 +26,18 @@ export default function Hero() {
         <div className="grid w-full grid-cols-1 gap-16 md:grid-cols-2 items-center">
           {/* LEFT CONTENT */}
           <div className="text-[var(--text-primary)]">
-            <p className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur">
+            <p
+              data-aos="fade-right"
+              className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur"
+            >
               🚀 Growth-driven digital marketing agency
             </p>
 
-            <h1 className="mb-6 text-4xl font-bold leading-tight md:text-6xl">
+            <h1
+              data-aos="fade-right"
+              data-aos-delay="100"
+              className="mb-6 text-4xl font-bold leading-tight md:text-6xl"
+            >
               Build a Powerful <br />
               <span className="text-[var(--accent-primary)]">
                 Digital Presence
@@ -33,20 +45,31 @@ export default function Hero() {
               in Dubai
             </h1>
 
-            <p className="mb-8 max-w-xl text-[var(--text-secondary)] text-lg">
+            <p
+              data-aos="fade-right"
+              data-aos-delay="200"
+              className="mb-8 max-w-xl text-[var(--text-secondary)] text-lg"
+            >
               We help brands dominate search, social, and paid media with
               data-driven strategies designed for Dubai’s competitive market.
             </p>
 
             {/* CTA BUTTONS */}
-            <div className="flex flex-wrap gap-4">
-              <Button text="Get Free Strategy Call" href="#contact" />
-
+            <div
+              data-aos="fade-right"
+              data-aos-delay="300"
+              className="flex flex-wrap gap-4"
+            >
               <Button
-                text="View Services"
-                href="#services"
-                className="bg-transparent border border-[var(--border-light)] text-[var(--text-primary)] "
+                text="Get Free Strategy Call"
+                onClick={() => setOpen(true)}
               />
+              <Link href="/services">
+                <Button
+                  text="View Services"
+                  className="bg-transparent border border-[var(--border-light)] text-[var(--text-primary)] "
+                />
+              </Link>
             </div>
           </div>
 
@@ -54,6 +77,7 @@ export default function Hero() {
           <div className="relative hidden md:flex items-center justify-start"></div>
         </div>
       </div>
+      <ServicePopup isOpen={open} onClose={() => setOpen(false)} />
     </section>
   );
 }

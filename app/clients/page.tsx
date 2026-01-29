@@ -50,7 +50,11 @@ export default function ClientPage() {
             </div>
 
             {/* TITLE */}
-            <h1 className="mb-6 text-4xl md:text-6xl font-bold leading-tight text-[var(--text-primary)]">
+            <h1
+              data-aos="fade-right"
+              data-aos-delay="100"
+              className="mb-6 text-4xl md:text-6xl font-bold leading-tight text-[var(--text-primary)]"
+            >
               Brands That <br />
               <span className="text-[var(--accent-primary)]">
                 Trust & Grow With Us
@@ -58,7 +62,11 @@ export default function ClientPage() {
             </h1>
 
             {/* SUBTEXT */}
-            <p className="max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]">
+            <p
+              data-aos="fade-right"
+              data-aos-delay="300"
+              className="max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]"
+            >
               From ambitious startups to established enterprises, we partner
               with brands that value strategy, creativity, and measurable
               digital growth. Every collaboration is built on trust,
@@ -89,19 +97,42 @@ export default function ClientPage() {
         <div className="relative z-10 mx-auto w-11/12 md:w-5/6 ">
           {/* ================= HEADING ================= */}
           <div className="mb-20 text-center">
-            <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur">
+            <p
+              data-aos="zoom-in"
+              data-aos-delay="100"
+              className="mb-4 inline-flex items-center gap-2 rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur"
+            >
               <span className="h-2 w-2 rounded-full bg-[var(--accent-primary)]" />
               Trusted Partnerships
             </p>
 
-            <h2 className="text-3xl md:text-5xl font-bold text-[var(--text-primary)]">
+            <h2
+              data-aos="fade-up"
+              data-aos-delay="200"
+              className="text-3xl md:text-5xl font-bold text-[var(--text-primary)]"
+            >
               Trusted by{" "}
-              <span className="text-[var(--accent-primary)]">
+              <span
+                className="
+    bg-gradient-to-r
+    from-[var(--accent-primary)]
+    via-[#FFD88A]
+    to-[var(--accent-glow)]
+    bg-clip-text
+    text-transparent
+    drop-shadow-[0_0_12px_rgba(255,200,100,0.35)]
+  "
+              >
+                {" "}
                 Leading Brands
               </span>
             </h2>
 
-            <p className="mt-5 max-w-2xl mx-auto text-[var(--text-secondary)]">
+            <p
+              data-aos="fade-up"
+              data-aos-delay="300"
+              className="mt-5 max-w-2xl mx-auto text-[var(--text-secondary)]"
+            >
               We collaborate with ambitious brands to build long-term growth,
               performance, and digital authority.
             </p>
@@ -112,6 +143,8 @@ export default function ClientPage() {
             {clients.map((client, index) => (
               <div
                 key={client.name}
+                data-aos="flip-left"
+                data-aos-delay={index * 200}
                 className="group relative flex items-center justify-center"
               >
                 {/* Floating glow ring */}

@@ -112,11 +112,19 @@ export default function Testimonials() {
       <div className="relative z-10 mx-auto w-11/12 md:w-5/6 py-16">
         {/* ================= HEADING ================= */}
         <div className="mb-24 max-w-3xl">
-          <p className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur">
+          <p
+            data-aos="zoom-in"
+            data-aos-delay="150"
+            className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur"
+          >
             Client Testimonials
           </p>
 
-          <h2 className="mb-6 text-3xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]">
+          <h2
+            data-aos="fade-up"
+            data-aos-delay="250"
+            className="mb-6 text-3xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]"
+          >
             Trusted by Brands That <br />
             <span
               className="

@@ -1,3 +1,4 @@
+@import "aos/dist/aos.css";
 @import "tailwindcss";
 
 :root {
@@ -35,4 +36,16 @@
   100% {
     transform: translate(-20%, -20%);
   }
+}
+
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hide {
+  overflow: auto;
+  -ms-overflow-style: none; /* IE & old Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
 }

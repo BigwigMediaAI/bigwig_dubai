@@ -22,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       type={type}
       onClick={onClick}
-      className={`group relative overflow-hidden rounded-full border border-(--border)
+      className={`group cursor-pointer relative overflow-hidden rounded-full border border-(--border)
         bg-(--primary) px-6 py-2 text-sm md:text-base 
         font-semibold uppercase text-(--text-primary)
         transition-all duration-300 ${className}`}

@@ -113,15 +113,23 @@ export default function ContactPage() {
             </div>
 
             {/* TITLE */}
-            <h1 className="mb-6 text-4xl md:text-6xl font-bold leading-tight text-[var(--text-primary)]">
+            <h2
+              data-aos="fade-right"
+              data-aos-delay="200"
+              className="mb-6 text-4xl md:text-6xl font-bold leading-tight text-[var(--text-primary)]"
+            >
               Let’s Start a <br />
               <span className="text-[var(--accent-primary)]">
                 Meaningful Conversation
               </span>
-            </h1>
+            </h2>
 
             {/* SUBTEXT */}
-            <p className="max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]">
+            <p
+              data-aos="fade-right"
+              data-aos-delay="400"
+              className="max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]"
+            >
               Tell us about your goals, challenges, or ideas. Our team will get
               back to you with clarity, strategy, and next steps tailored to
               your business.
@@ -148,27 +156,49 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* LEFT CONTENT */}
             <div>
-              <p className="mb-4 inline-flex items-center gap-2 text-sm text-[var(--text-secondary)]">
-                <span className="h-2 w-2 rounded-full bg-[var(--accent-primary)]" />
+              <p
+                data-aos="zoom-in"
+                data-aos-delay="100"
+                className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur"
+              >
                 Contact Us
               </p>
 
-              <h2 className="mb-6 text-4xl md:text-6xl font-bold leading-tight text-[var(--text-primary)]">
+              <h2
+                data-aos="fade-right"
+                data-aos-delay="200"
+                className="mb-6 text-3xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]"
+              >
                 Want to work with us? <br />
-                <span className="text-[var(--accent-primary)]">
+                <span
+                  className="
+    bg-gradient-to-r
+    from-[var(--accent-primary)]
+    via-[#FFD88A]
+    to-[var(--accent-glow)]
+    bg-clip-text
+    text-transparent
+    drop-shadow-[0_0_12px_rgba(255,200,100,0.35)]
+  "
+                >
+                  {" "}
                   Let’s connect
                 </span>
               </h2>
 
-              <p className="max-w-xl text-[var(--text-secondary)]">
+              <p
+                data-aos="fade-right"
+                data-aos-delay="400"
+                className="max-w-xl text-[var(--text-secondary)]"
+              >
                 Follow us on social platforms or reach out directly — we’re
                 always open to meaningful conversations.
               </p>
             </div>
 
             {/* RIGHT SOCIAL GRID */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {socials.map((item) => {
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {socials.map((item, i) => {
                 const Icon = item.icon;
 
                 return (
@@ -177,10 +207,22 @@ export default function ContactPage() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center justify-between rounded-xl border border-[var(--border-light)] bg-[var(--bg-glass)] px-5 py-4 backdrop-blur-md"
+                    data-aos="flip-left"
+                    data-aos-delay={i * 120}
+                    data-aos-duration="900"
+                    className="
+          group flex items-center justify-between
+          rounded-xl
+          border border-[var(--border-light)]
+          bg-[var(--bg-glass)]
+          px-5 py-4
+          backdrop-blur-md
+          transition-all duration-300
+          hover:border-[var(--accent-primary)]/50
+        "
                   >
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-primary)]/15 text-[var(--accent-primary)]">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-primary)]/15 text-[var(--accent-primary)] transition group-hover:scale-110">
                         <Icon size={18} />
                       </div>
                       <span className="text-sm font-medium text-[var(--text-primary)]">
@@ -190,7 +232,7 @@ export default function ContactPage() {
 
                     <ArrowUpRight
                       size={16}
-                      className="text-[var(--text-muted)]"
+                      className="text-[var(--text-muted)] transition group-hover:text-[var(--accent-primary)]"
                     />
                   </a>
                 );
@@ -200,7 +242,11 @@ export default function ContactPage() {
           {/* ================= CONTACT INFO ================= */}
           <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* ADDRESS */}
-            <div className="group relative rounded-2xl border border-[var(--border-light)] bg-[var(--bg-glass)] p-6 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.25)]">
+            <div
+              data-aos="flip-left"
+              data-aos-delay="100"
+              className="group relative rounded-2xl border border-[var(--border-light)] bg-[var(--bg-glass)] p-6 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.25)]"
+            >
               {/* TOP ACCENT */}
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--accent-primary)]/60 to-transparent" />
 
@@ -220,7 +266,11 @@ export default function ContactPage() {
             </div>
 
             {/* PHONE */}
-            <div className="group relative rounded-2xl border border-[var(--border-light)] bg-[var(--bg-glass)] p-6 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.25)]">
+            <div
+              data-aos="flip-left"
+              data-aos-delay="300"
+              className="group relative rounded-2xl border border-[var(--border-light)] bg-[var(--bg-glass)] p-6 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.25)]"
+            >
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--accent-primary)]/60 to-transparent" />
 
               <div className="mb-4 flex items-center gap-3">
@@ -238,7 +288,11 @@ export default function ContactPage() {
             </div>
 
             {/* EMAIL */}
-            <div className="group relative rounded-2xl border border-[var(--border-light)] bg-[var(--bg-glass)] p-6 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.25)]">
+            <div
+              data-aos="flip-left"
+              data-aos-delay="500"
+              className="group relative rounded-2xl border border-[var(--border-light)] bg-[var(--bg-glass)] p-6 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.25)]"
+            >
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--accent-primary)]/60 to-transparent" />
 
               <div className="mb-4 flex items-center gap-3">
@@ -291,7 +345,11 @@ export default function ContactPage() {
         <div className="relative z-10 mx-auto w-11/12 md:w-5/6 py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* ================= LEFT: FORM ================= */}
-            <div className="relative rounded-3xl border border-[var(--border-light)] bg-[var(--bg-glass)] p-8 md:p-10 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.45)]">
+            <div
+              data-aos="zoom-in"
+              data-aos-delay="100"
+              className="relative rounded-3xl border border-[var(--border-light)] bg-[var(--bg-glass)] p-8 md:p-10 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
+            >
               {/* SUBTLE INNER GLOW */}
               <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-[var(--accent-primary)]/10" />
 
@@ -312,7 +370,7 @@ export default function ContactPage() {
               </div>
 
               {/* FORM */}
-              <form className="space-y-5">
+              <form className="space-y-3">
                 {/* NAME + PHONE */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Input label="Full Name" placeholder="John Doe" />
@@ -328,13 +386,19 @@ export default function ContactPage() {
                     Services you’re interested in
                   </label>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {[
                       "SEO",
-                      "Paid Advertising",
-                      "Branding",
-                      "Web Development",
-                      "Social Media",
+                      "Performance Marketing",
+                      "SMM",
+                      "Content Marketing",
+                      "Website Development",
+                      "Email Marketing",
+                      "SMO",
+                      "Graphic & Video Design",
+                      "Affiliate Marketing",
+                      "Influencer Marketing",
+                      "ORM",
                     ].map((service) => (
                       <label
                         key={service}
@@ -380,9 +444,22 @@ export default function ContactPage() {
                 FAQs
               </p>
 
-              <h3 className="mb-8 text-3xl font-bold text-[var(--text-primary)]">
-                Everything You Might Want to Know
-              </h3>
+              <h2 className="mb-6 text-3xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]">
+                Everything You Might{" "}
+                <span
+                  className="
+    bg-gradient-to-r
+    from-[var(--accent-primary)]
+    via-[#FFD88A]
+    to-[var(--accent-glow)]
+    bg-clip-text
+    text-transparent
+    drop-shadow-[0_0_12px_rgba(255,200,100,0.35)]
+  "
+                >
+                  Want to Know
+                </span>
+              </h2>
 
               <div className="space-y-3">
                 {faqs.map((item, index) => (

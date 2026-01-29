@@ -8,8 +8,11 @@ import Button from "../components/Button";
 import { Target, Eye, Users } from "lucide-react";
 import { Search, Layers, Rocket, TrendingUp } from "lucide-react";
 import GlobalCTA from "../components/Cta";
+import ServicePopup from "../components/Popup";
+import { useState } from "react";
 
 export default function AboutPage() {
+  const [open, setOpen] = useState(false);
   return (
     <div className="relative ">
       {/* NAVBAR */}
@@ -45,7 +48,11 @@ export default function AboutPage() {
             </div>
 
             {/* TITLE */}
-            <h1 className="mb-6 text-4xl md:text-6xl font-bold leading-tight text-[var(--text-primary)]">
+            <h1
+              data-aos="fade-right"
+              data-aos-delay="50"
+              className="mb-6 text-4xl md:text-6xl font-bold leading-tight text-[var(--text-primary)]"
+            >
               Building Digital Brands <br />
               <span className="text-[var(--accent-primary)]">
                 That Lead Markets
@@ -53,7 +60,11 @@ export default function AboutPage() {
             </h1>
 
             {/* SUBTEXT */}
-            <p className="max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]">
+            <p
+              data-aos="fade-right"
+              data-aos-delay="200"
+              className="max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]"
+            >
               We are a performance-driven digital marketing agency helping
               ambitious brands grow, scale, and dominate competitive markets
               like Dubai through strategy, creativity, and technology.
@@ -77,11 +88,19 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             {/* ================= LEFT CONTENT (STICKY) ================= */}
             <div className="lg:sticky lg:top-32 self-start">
-              <p className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur">
+              <p
+                data-aos="zoom-in"
+                data-aos-delay="50"
+                className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur"
+              >
                 About Us
               </p>
 
-              <h2 className="mb-6 text-3xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]">
+              <h2
+                data-aos="fade-up"
+                data-aos-delay="200"
+                className="mb-6 text-3xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]"
+              >
                 A Digital Partner Built <br />
                 <span
                   className="
@@ -99,23 +118,39 @@ export default function AboutPage() {
                 </span>
               </h2>
 
-              <p className="mb-6 max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]">
+              <p
+                data-aos="fade-up"
+                data-aos-delay="300"
+                className="mb-6 max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]"
+              >
                 We help ambitious brands grow through performance marketing,
                 creativity, and data-driven strategy — focused on measurable
                 impact.
               </p>
 
-              <p className="mb-10 max-w-xl text-[var(--text-muted)]">
+              <p
+                data-aos="fade-up"
+                data-aos-delay="400"
+                className="mb-10 max-w-xl text-[var(--text-muted)]"
+              >
                 From startups to enterprises, we work as an extension of your
                 team to deliver consistent results in competitive markets like
                 Dubai.
               </p>
-
-              <Button text="Let’s Work Together" />
+              <div data-aos="flip-left" data-aos-delay="500">
+                <Button
+                  onClick={() => setOpen(true)}
+                  text="Let’s Work Together"
+                />
+              </div>
             </div>
 
             {/* ================= RIGHT SCROLL STORY ================= */}
-            <div className="relative h-[260vh]">
+            <div
+              data-aos="zoom-in"
+              data-aos-delay="200"
+              className="relative h-[260vh]"
+            >
               {/* CARD 1 – BASE */}
               <div className="sticky top-32 z-10">
                 <Card
@@ -183,11 +218,19 @@ export default function AboutPage() {
         <div className="relative z-10 mx-auto w-11/12 md:w-5/6 py-16">
           {/* ================= SECTION HEADER ================= */}
           <div className="mb-20 max-w-3xl">
-            <p className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur">
+            <p
+              data-aos="zoom-in"
+              data-aos-delay="100"
+              className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur"
+            >
               Why Choose Us
             </p>
 
-            <h2 className="mb-6 text-3xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]">
+            <h2
+              data-aos="fade-up"
+              data-aos-delay="200"
+              className="mb-6 text-3xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]"
+            >
               We Focus on What <br />
               <span
                 className="
@@ -205,7 +248,11 @@ export default function AboutPage() {
               </span>
             </h2>
 
-            <p className="text-[var(--text-secondary)]">
+            <p
+              data-aos="fade-up"
+              data-aos-delay="300"
+              className="text-[var(--text-secondary)]"
+            >
               Our approach combines experience, transparency, and performance to
               help brands grow confidently in competitive markets.
             </p>
@@ -214,7 +261,11 @@ export default function AboutPage() {
           {/* ================= GRID ================= */}
           <div className="grid grid-cols-1 lg:grid-cols-3 auto-rows-[240px] gap-6">
             {/* COLLABORATION (TALL) */}
-            <div className="lg:row-span-2 rounded-2xl overflow-hidden border border-[var(--border-light)] bg-black relative">
+            <div
+              data-aos="flip-left"
+              data-aos-delay="200"
+              className="lg:row-span-2 rounded-2xl overflow-hidden border border-[var(--border-light)] bg-black relative"
+            >
               <img
                 src="/aboutPage/coll.png"
                 alt="Collaboration"
@@ -233,7 +284,11 @@ export default function AboutPage() {
             </div>
 
             {/* YEARS OF EXPERIENCE (TALL) */}
-            <div className="lg:row-span-2 rounded-2xl overflow-hidden border border-[var(--border-light)] bg-black relative">
+            <div
+              data-aos="flip-left"
+              data-aos-delay="300"
+              className="lg:row-span-2 rounded-2xl overflow-hidden border border-[var(--border-light)] bg-black relative"
+            >
               <img
                 src="/aboutPage/exp.png"
                 alt="Years of Experience"
@@ -252,7 +307,11 @@ export default function AboutPage() {
             </div>
 
             {/* GROWTH (TALL) */}
-            <div className="lg:row-span-2 rounded-2xl overflow-hidden border border-[var(--border-light)] bg-black relative">
+            <div
+              data-aos="flip-left"
+              data-aos-delay="400"
+              className="lg:row-span-2 rounded-2xl overflow-hidden border border-[var(--border-light)] bg-black relative"
+            >
               <img
                 src="/aboutPage/growth.png"
                 alt="Growth"
@@ -270,7 +329,11 @@ export default function AboutPage() {
             </div>
 
             {/* HAPPY CLIENTS (WIDE) */}
-            <div className="lg:col-span-2 relative overflow-hidden rounded-2xl border border-[var(--border-light)] bg-[var(--bg-glass)] backdrop-blur-md">
+            <div
+              data-aos="flip-left"
+              data-aos-delay="500"
+              className="lg:col-span-2 relative overflow-hidden rounded-2xl border border-[var(--border-light)] bg-[var(--bg-glass)] backdrop-blur-md"
+            >
               <div className="grid h-full grid-cols-1 md:grid-cols-2">
                 {/* LEFT CONTENT */}
                 <div className="flex flex-col justify-center p-8">
@@ -312,7 +375,11 @@ export default function AboutPage() {
             </div>
 
             {/* QUALITY / TRUST (SINGLE) */}
-            <div className="rounded-2xl overflow-hidden border border-[var(--border-light)] bg-black relative">
+            <div
+              data-aos="flip-left"
+              data-aos-delay="600"
+              className="rounded-2xl overflow-hidden border border-[var(--border-light)] bg-black relative"
+            >
               <img
                 src="/aboutPage/commit.png"
                 alt="Commitment to Quality"
@@ -346,11 +413,19 @@ export default function AboutPage() {
         <div className="relative z-10 mx-auto w-11/12 md:w-5/6 py-16">
           {/* ================= HEADER ================= */}
           <div className="mb-20 max-w-3xl">
-            <p className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur">
+            <p
+              data-aos="zoom-in"
+              data-aos-delay="100"
+              className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur"
+            >
               Our Process
             </p>
 
-            <h2 className="mb-6 text-3xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]">
+            <h2
+              data-aos="fade-up"
+              data-aos-delay="200"
+              className="mb-6 text-3xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]"
+            >
               How We Turn Ideas Into <br />
               <span
                 className="
@@ -368,7 +443,11 @@ export default function AboutPage() {
               </span>
             </h2>
 
-            <p className="text-[var(--text-secondary)]">
+            <p
+              data-aos="fade-up"
+              data-aos-delay="300"
+              className="text-[var(--text-secondary)]"
+            >
               A clear, structured approach designed to deliver consistent and
               measurable results.
             </p>
@@ -377,7 +456,11 @@ export default function AboutPage() {
           {/* ================= PROCESS STEPS ================= */}
           <div className="relative grid grid-cols-1 md:grid-cols-4 gap-12">
             {/* FLOWING CONNECTOR */}
-            <div className="hidden md:block absolute top-14 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[var(--accent-primary)]/40 to-transparent" />
+            <div
+              data-aos="zoom-in"
+              data-aos-delay="200"
+              className="hidden md:block absolute top-14 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[var(--accent-primary)]/40 to-transparent"
+            />
 
             <ProcessStep
               number="01"
@@ -413,6 +496,7 @@ export default function AboutPage() {
       <GlobalCTA />
 
       <Footer />
+      <ServicePopup isOpen={open} onClose={() => setOpen(false)} />
     </div>
   );
 }
@@ -481,7 +565,11 @@ function ProcessStep({ number, title, text, icon }: ProcessStepProps) {
   const Icon = ICONS[icon];
 
   return (
-    <div className="relative group text-center md:text-left">
+    <div
+      data-aos="flip-left"
+      data-aos-delay="200"
+      className="relative group text-center md:text-left"
+    >
       {/* ICON + NUMBER */}
       <div className="relative z-10 mx-auto md:mx-0 mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-[var(--border-accent)] bg-[var(--bg-glass)] backdrop-blur-md text-[var(--accent-primary)] shadow-[0_0_30px_var(--accent-glow)]">
         <Icon size={22} strokeWidth={2} />

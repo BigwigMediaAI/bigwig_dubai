@@ -30,7 +30,11 @@ export default function About() {
             {/* Image glow */}
             <div className="absolute -inset-6 rounded-3xl bg-[var(--accent-primary)]/20 blur-2xl" />
 
-            <div className="relative overflow-hidden rounded-tl-4xl rounded-br-4xl border border-[var(--border-light)]">
+            <div
+              data-aos="zoom-in"
+              data-aos-delay="200"
+              className="relative overflow-hidden rounded-tl-4xl rounded-br-4xl border border-[var(--border-light)]"
+            >
               <Image
                 src="/about.png"
                 alt="Digital marketing team in Dubai"
@@ -43,11 +47,18 @@ export default function About() {
 
           {/* RIGHT: CONTENT */}
           <div className="text-[var(--text-primary)]">
-            <p className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur">
+            <p
+              data-aos="zoom-in"
+              className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur"
+            >
               About Us
             </p>
 
-            <h2 className="mb-6 text-3xl md:text-5xl font-bold leading-tight">
+            <h2
+              data-aos="fade-up"
+              data-aos-delay="200"
+              className="mb-6 text-3xl md:text-5xl font-bold leading-tight"
+            >
               A Digital Marketing Agency <br />
               Built for{" "}
               <span
@@ -66,13 +77,21 @@ export default function About() {
               </span>
             </h2>
 
-            <p className="mb-6 text-lg text-[var(--text-secondary)] leading-relaxed">
+            <p
+              data-aos="fade-up"
+              data-aos-delay="400"
+              className="mb-6 text-lg text-[var(--text-secondary)] leading-relaxed"
+            >
               We are a performance-driven digital marketing agency helping
               brands grow visibility, traffic, and revenue in one of the world’s
               most competitive business landscapes — Dubai.
             </p>
 
-            <p className="mb-8 text-[var(--text-secondary)] leading-relaxed">
+            <p
+              data-aos="fade-up"
+              data-aos-delay="600"
+              className="mb-8 text-[var(--text-secondary)] leading-relaxed"
+            >
               From SEO and paid media to content and conversion optimization, we
               combine strategy, creativity, and data to deliver measurable
               results — not vanity metrics.
@@ -98,7 +117,9 @@ export default function About() {
             </div> */}
 
             {/* CTA */}
-            <Button text="Learn More About Us" href="/about" />
+            <div data-aos="flip-left" data-aos-delay="700">
+              <Button text="Learn More About Us" href="/about" />
+            </div>
           </div>
         </div>
       </div>
