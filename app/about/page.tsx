@@ -57,7 +57,6 @@ export default function AboutPage() {
                 That Lead Markets
               </span>
             </h1>
-
             {/* SUBTEXT */}
             <p
               data-aos="fade-right"
