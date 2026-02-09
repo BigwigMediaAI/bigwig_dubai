@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -9,7 +10,6 @@ import { Target, Eye, Users } from "lucide-react";
 import { Search, Layers, Rocket, TrendingUp } from "lucide-react";
 import GlobalCTA from "../components/Cta";
 import ServicePopup from "../components/Popup";
-import { useState } from "react";
 
 export default function AboutPage() {
   const [open, setOpen] = useState(false);
