@@ -7,95 +7,63 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
-/* ================= DATA ================= */
+/* ================= TYPES ================= */
 
-const testimonials = [
-  {
-    id: 1,
-    name: "James R.",
-    role: "Startup Founder",
-    image: "/t1.webp",
-    text: "From start to finish, the communication was seamless and the design blew us away. They really know how to bring a brand to life!",
-    rating: 5,
-  },
-  {
-    id: 2,
-    name: "Emma L.",
-    role: "Marketing Head",
-    image: "/t1.webp",
-    text: "Professional team with excellent execution. Highly recommended.",
-    rating: 5,
-  },
-  {
-    id: 3,
-    name: "Daniel K.",
-    role: "E-commerce Owner",
-    image: "/t1.webp",
-    text: "Conversions increased massively after working with them.",
-    rating: 5,
-  },
-  {
-    id: 4,
-    name: "Sophia M.",
-    role: "Brand Manager",
-    image: "/t1.webp",
-    text: "Clean design, great communication, and solid results.",
-    rating: 5,
-  },
-  {
-    id: 5,
-    name: "Chris P.",
-    role: "SaaS Founder",
-    image: "/t1.webp",
-    text: "They understand branding at a very deep level.",
-    rating: 5,
-  },
-  {
-    id: 6,
-    name: "Olivia N.",
-    role: "Consultant",
-    image: "/t1.webp",
-    text: "Everything was smooth and well executed.",
-    rating: 5,
-  },
-  {
-    id: 7,
-    name: "Ryan T.",
-    role: "Agency Owner",
-    image: "/t1.webp",
-    text: "One of the best teams we have worked with.",
-    rating: 5,
-  },
-  {
-    id: 8,
-    name: "Ava S.",
-    role: "Product Lead",
-    image: "/t1.webp",
-    text: "High quality output with attention to detail.",
-    rating: 5,
-  },
-];
+interface Testimonial {
+  _id: string;
+  name: string;
+  designation: string;
+  message: string;
+  image: string | null;
+  rating: number;
+}
 
 /* ================= COMPONENT ================= */
 
 export default function Testimonials() {
-  const [active, setActive] = useState(testimonials[0]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [active, setActive] = useState<Testimonial | null>(null);
 
-  /* AUTO ROTATE (DESKTOP) */
+  /* ================= FETCH TESTIMONIALS ================= */
   useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE}/testimonial/public/list`,
+        );
+        const data = await res.json();
+
+        setTestimonials(data);
+        setActive(data[0]);
+      } catch (error) {
+        console.error("Failed to load testimonials");
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
+
+  /* ================= AUTO ROTATE (DESKTOP) ================= */
+  useEffect(() => {
+    if (!testimonials.length) return;
+
     const interval = setInterval(() => {
       setActive((prev) => {
-        const currentIndex = testimonials.findIndex((t) => t.id === prev.id);
+        if (!prev) return testimonials[0];
+
+        const currentIndex = testimonials.findIndex((t) => t._id === prev._id);
         return testimonials[(currentIndex + 1) % testimonials.length];
       });
     }, 4000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [testimonials]);
+
+  if (!active) return null;
 
   return (
     <section className="relative bg-black overflow-hidden">
-      {/* MAZE / GRID BACKGROUND – FULL SECTION */}
+      {/* GRID BACKGROUND */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
@@ -108,36 +76,16 @@ export default function Testimonials() {
       {/* CENTER GLOW */}
       <div className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--accent-primary)]/20 blur-[200px]" />
 
-      {/* CONTENT WRAPPER */}
       <div className="relative z-10 mx-auto w-11/12 md:w-5/6 py-16">
         {/* ================= HEADING ================= */}
         <div className="mb-24 max-w-3xl">
-          <p
-            data-aos="zoom-in"
-            data-aos-delay="150"
-            className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur"
-          >
+          <p className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)] backdrop-blur">
             Client Testimonials
           </p>
 
-          <h2
-            data-aos="fade-up"
-            data-aos-delay="250"
-            className="mb-6 text-3xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]"
-          >
+          <h2 className="mb-6 text-3xl md:text-5xl font-bold text-[var(--text-primary)]">
             Trusted by Brands That <br />
-            <span
-              className="
-    bg-gradient-to-r
-    from-[var(--accent-primary)]
-    via-[#FFD88A]
-    to-[var(--accent-glow)]
-    bg-clip-text
-    text-transparent
-    drop-shadow-[0_0_12px_rgba(255,200,100,0.35)]
-  "
-            >
-              {" "}
+            <span className="bg-gradient-to-r from-[var(--accent-primary)] via-[#FFD88A] to-[var(--accent-glow)] bg-clip-text text-transparent">
               Demand Real Results
             </span>
           </h2>
@@ -146,7 +94,6 @@ export default function Testimonials() {
         {/* ================= DESKTOP ARC ================= */}
         <div className="relative hidden lg:flex justify-center">
           <div className="relative h-[420px] w-[760px]">
-            {/* AVATAR ARC */}
             {testimonials.map((item, index) => {
               const total = testimonials.length;
               const radius = 560;
@@ -162,7 +109,7 @@ export default function Testimonials() {
 
               return (
                 <button
-                  key={item.id}
+                  key={item._id}
                   onClick={() => setActive(item)}
                   style={{
                     transform: `translate(${x}px, ${y + centerY}px)`,
@@ -170,15 +117,14 @@ export default function Testimonials() {
                   className="absolute left-1/2 -translate-x-1/2 transition-all duration-500"
                 >
                   <div
-                    className={`relative h-24 w-24 rounded-full overflow-hidden
-                    ${
-                      active.id === item.id
+                    className={`relative h-24 w-24 rounded-full overflow-hidden ${
+                      active._id === item._id
                         ? "ring-4 ring-[var(--border-accent)] scale-110 shadow-[0_0_45px_var(--accent-glow)]"
                         : "opacity-50 hover:opacity-100"
                     }`}
                   >
                     <Image
-                      src={item.image}
+                      src={item.image || "/ti.png"}
                       alt={item.name}
                       fill
                       className="object-cover"
@@ -190,23 +136,11 @@ export default function Testimonials() {
 
             {/* CENTER CONTENT */}
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-              <div className="mb-10">
-                <Quote
-                  size={72}
-                  strokeWidth={2.2}
-                  className="text-[var(--accent-primary)]"
-                />
-              </div>
+              <Quote size={72} className="mb-10 text-[var(--accent-primary)]" />
 
-              <p className="mb-8 max-w-xl text-lg md:text-2xl leading-relaxed text-[var(--text-secondary)]">
-                {active.text}
+              <p className="mb-8 max-w-xl text-lg md:text-2xl text-[var(--text-secondary)]">
+                {active.message}
               </p>
-
-              <div className="mb-8 flex items-center justify-center gap-3">
-                <span className="h-px w-40 bg-[var(--border-accent)]" />
-                <span className="h-2 w-2 rounded-full bg-[var(--accent-primary)]" />
-                <span className="h-px w-40 bg-[var(--border-accent)]" />
-              </div>
 
               <div className="mb-6 flex gap-1">
                 {Array.from({ length: active.rating }).map((_, i) => (
@@ -221,7 +155,9 @@ export default function Testimonials() {
               <p className="text-xl font-semibold text-[var(--text-primary)]">
                 {active.name}
               </p>
-              <p className="text-lg text-[var(--text-muted)]">{active.role}</p>
+              <p className="text-lg text-[var(--text-muted)]">
+                {active.designation}
+              </p>
             </div>
           </div>
         </div>
@@ -234,13 +170,10 @@ export default function Testimonials() {
             centeredSlides
             loop
             modules={[Autoplay]}
-            autoplay={{
-              delay: 4000,
-              disableOnInteraction: false,
-            }}
+            autoplay={{ delay: 4000 }}
           >
             {testimonials.map((item) => (
-              <SwiperSlide key={item.id}>
+              <SwiperSlide key={item._id}>
                 <MobileTestimonialCard item={item} />
               </SwiperSlide>
             ))}
@@ -253,13 +186,13 @@ export default function Testimonials() {
 
 /* ================= MOBILE CARD ================= */
 
-function MobileTestimonialCard({ item }: { item: any }) {
+function MobileTestimonialCard({ item }: { item: Testimonial }) {
   return (
     <div className="rounded-2xl border border-[var(--border-light)] bg-[var(--bg-glass)] p-6 backdrop-blur-md text-center">
       <Quote size={40} className="mx-auto mb-4 text-[var(--accent-primary)]" />
 
-      <p className="mb-6 text-base leading-relaxed text-[var(--text-secondary)]">
-        {item.text}
+      <p className="mb-6 text-base text-[var(--text-secondary)]">
+        {item.message}
       </p>
 
       <div className="mb-4 flex justify-center gap-1">
@@ -273,7 +206,7 @@ function MobileTestimonialCard({ item }: { item: any }) {
       </div>
 
       <p className="font-semibold text-[var(--text-primary)]">{item.name}</p>
-      <p className="text-sm text-[var(--text-muted)]">{item.role}</p>
+      <p className="text-sm text-[var(--text-muted)]">{item.designation}</p>
     </div>
   );
 }

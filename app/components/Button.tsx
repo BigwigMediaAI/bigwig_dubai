@@ -7,7 +7,7 @@ interface ButtonProps {
   text: React.ReactNode;
   href?: string;
   type?: "button" | "submit" | "reset";
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
 }
 
@@ -42,7 +42,7 @@ const Button: React.FC<ButtonProps> = ({
       />
 
       {/* TEXT */}
-      <span className="relative z-10 flex items-center gap-2 transition-colors duration-300 group-hover:text-black">
+      <span className="relative z-10 flex justify-center items-center gap-2 transition-colors duration-300 group-hover:text-black">
         {text}
         <span className="transition-transform duration-300 group-hover:translate-x-1">
           →

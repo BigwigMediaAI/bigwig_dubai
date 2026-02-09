@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { MapPin, Phone, Mail } from "lucide-react";
 import Button from "../components/Button";
+import ContactFormCard from "../components/ContactFormCard";
 
 const socials = [
   {
@@ -345,98 +346,8 @@ export default function ContactPage() {
         <div className="relative z-10 mx-auto w-11/12 md:w-5/6 py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* ================= LEFT: FORM ================= */}
-            <div
-              data-aos="zoom-in"
-              data-aos-delay="100"
-              className="relative rounded-3xl border border-[var(--border-light)] bg-[var(--bg-glass)] p-8 md:p-10 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
-            >
-              {/* SUBTLE INNER GLOW */}
-              <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-[var(--accent-primary)]/10" />
 
-              {/* HEADER */}
-              <div className="mb-10">
-                <p className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)]">
-                  Start a Conversation
-                </p>
-
-                <h3 className="mb-3 text-2xl md:text-3xl font-semibold text-[var(--text-primary)]">
-                  Tell us about your project
-                </h3>
-
-                <p className="max-w-md text-[var(--text-secondary)]">
-                  Share a few details and our team will get back to you with
-                  clear next steps.
-                </p>
-              </div>
-
-              {/* FORM */}
-              <form className="space-y-3">
-                {/* NAME + PHONE */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Input label="Full Name" placeholder="John Doe" />
-                  <Input label="Phone Number" placeholder="+971 50 123 4567" />
-                </div>
-
-                {/* EMAIL */}
-                <Input label="Email Address" placeholder="you@company.com" />
-
-                {/* SERVICES */}
-                <div>
-                  <label className="mb-3 block text-sm text-[var(--text-secondary)]">
-                    Services you’re interested in
-                  </label>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {[
-                      "SEO",
-                      "Performance Marketing",
-                      "SMM",
-                      "Content Marketing",
-                      "Website Development",
-                      "Email Marketing",
-                      "SMO",
-                      "Graphic & Video Design",
-                      "Affiliate Marketing",
-                      "Influencer Marketing",
-                      "ORM",
-                    ].map((service) => (
-                      <label
-                        key={service}
-                        className="group flex items-center gap-3 rounded-lg border border-[var(--border-light)] bg-black/40 px-4 py-3 text-sm text-[var(--text-secondary)] transition"
-                      >
-                        <input
-                          type="checkbox"
-                          className="accent-[var(--accent-primary)]"
-                        />
-                        <span className="group-hover:text-[var(--text-primary)]">
-                          {service}
-                        </span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                {/* MESSAGE */}
-                <div>
-                  <label className="mb-2 block text-sm text-[var(--text-secondary)]">
-                    Message
-                  </label>
-
-                  <textarea
-                    rows={5}
-                    placeholder="Tell us about your goals, timeline, or challenges..."
-                    className="w-full rounded-xl border border-[var(--border-light)] bg-black/40 px-4 py-4 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]/40"
-                  />
-                </div>
-
-                {/* DIVIDER */}
-                <div className="h-px w-full bg-gradient-to-r from-transparent via-[var(--accent-primary)]/40 to-transparent" />
-
-                {/* SUBMIT */}
-
-                <Button type="submit" text="Submit Inquiry" />
-              </form>
-            </div>
+            <ContactFormCard />
 
             {/* ================= RIGHT: FAQ ================= */}
             <div>

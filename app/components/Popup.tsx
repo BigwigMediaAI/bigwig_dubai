@@ -27,6 +27,20 @@ export default function ServicePopup({
 }) {
   const [mounted, setMounted] = useState(false);
 
+  /* ================= FORM STATE ================= */
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const [services, setServices] = useState<string[]>([]);
+  const [otp, setOtp] = useState("");
+  const [step, setStep] = useState<"FORM" | "OTP">("FORM");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   useEffect(() => {
     if (isOpen) {
       setMounted(true);
@@ -38,6 +52,85 @@ export default function ServicePopup({
   }, [isOpen]);
 
   if (!isOpen && !mounted) return null;
+
+  /* ================= HANDLERS ================= */
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const toggleService = (service: string) => {
+    setServices((prev) =>
+      prev.includes(service)
+        ? prev.filter((s) => s !== service)
+        : [...prev, service],
+    );
+  };
+
+  /* ================= SEND OTP ================= */
+  const handleSendOTP = async () => {
+    setError("");
+    setLoading(true);
+
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE}/lead/send-otp`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            ...form,
+            services,
+          }),
+        },
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.message);
+
+      setStep("OTP");
+    } catch (err: any) {
+      setError(err.message || "Failed to send OTP");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /* ================= VERIFY OTP ================= */
+  const handleVerifyOTP = async () => {
+    setError("");
+    setLoading(true);
+
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE}/lead/verify-otp`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: form.email,
+            otp,
+          }),
+        },
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.message);
+
+      onClose(); // success → close popup
+      setStep("FORM");
+      setForm({ name: "", email: "", phone: "", message: "" });
+      setServices([]);
+      setOtp("");
+    } catch (err: any) {
+      setError(err.message || "Invalid OTP");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-[999] flex items-center justify-center px-4">
@@ -51,95 +144,111 @@ export default function ServicePopup({
 
       {/* MODAL */}
       <div
-        className={`relative w-full max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-[#0b0b0b]/95 shadow-2xl backdrop-blur-xl transition-all duration-500 ease-out ${
+        className={`relative w-full max-w-lg overflow-hidden rounded-2xl border border-white/10 bg-[#0b0b0b]/95 shadow-2xl backdrop-blur-xl transition-all duration-500 ${
           isOpen
             ? "opacity-100 translate-y-0 scale-100"
             : "opacity-0 translate-y-10 scale-95"
         }`}
       >
-        {/* SOFT GLOW */}
-        <div className="pointer-events-none absolute -top-32 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full bg-[var(--accent-primary)]/25 blur-[160px]" />
-
         {/* HEADER */}
-        <div className="relative flex items-center justify-between border-b border-white/10 px-6 py-4">
+        <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
           <div className="flex items-center gap-2">
             <Sparkles className="text-[var(--accent-primary)]" size={18} />
-            <h2 className="text-lg font-semibold text-[var(--text-primary)]">
-              Start Your Project
+            <h2 className="text-lg font-semibold text-white">
+              {step === "FORM" ? "Start Your Project" : "Verify OTP"}
             </h2>
           </div>
-
-          <button
-            onClick={onClose}
-            className="text-white/60 hover:text-[var(--accent-primary)] transition"
-          >
+          <button className="text-[var(--accent-primary)]" onClick={onClose}>
             <X size={20} />
           </button>
         </div>
 
-        {/* SCROLLABLE CONTENT */}
-        <div className="max-h-[70vh] overflow-y-auto px-6 py-5 scrollbar-hide">
-          <p className="mb-6 text-sm text-[var(--text-secondary)]">
-            Share your requirements and our team will reach out with strategy,
-            timelines, and next steps.
-          </p>
+        <div className="px-6 py-5 space-y-4">
+          {error && (
+            <p className="text-sm text-red-500 bg-red-500/10 px-3 py-2 rounded">
+              {error}
+            </p>
+          )}
 
-          <form className="space-y-5">
-            <div className="flex gap-4">
-              {/* NAME */}
+          {/* ================= FORM STEP ================= */}
+          {step === "FORM" && (
+            <>
+              <div className="flex gap-4">
+                <input
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  placeholder="Your Name"
+                  className="w-full rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[var(--accent-primary)] focus:outline-none"
+                />
+                <input
+                  name="phone"
+                  value={form.phone}
+                  onChange={handleChange}
+                  placeholder="Phone Number"
+                  className="w-full rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[var(--accent-primary)] focus:outline-none"
+                />
+              </div>
+
               <input
-                type="text"
-                placeholder="Your Name"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                placeholder="Email Address"
                 className="w-full rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[var(--accent-primary)] focus:outline-none"
               />
-              {/* PHONE */}
-              <input
-                type="tel"
-                placeholder="Phone Number"
-                className="w-full rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[var(--accent-primary)] focus:outline-none"
-              />
-            </div>
-
-            {/* EMAIL */}
-            <input
-              type="email"
-              placeholder="Email Address"
-              className="w-full rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[var(--accent-primary)] focus:outline-none"
-            />
-
-            {/* SERVICES */}
-            <div>
-              <p className="mb-3 text-sm font-medium text-[var(--text-secondary)]">
-                Services you’re interested in
-              </p>
 
               <div className="flex flex-wrap gap-2">
                 {servicesList.map((service) => (
                   <label
                     key={service}
-                    className="cursor-pointer rounded-full border border-white/10 bg-black/40 px-4 py-2 text-xs text-white/80 transition hover:border-[var(--accent-primary)]/50"
+                    className={`px-4 py-2 text-xs rounded-full cursor-pointer border ${
+                      services.includes(service)
+                        ? "border-[var(--accent-primary)] text-[var(--accent-primary)]"
+                        : "border-white/10 text-white/70"
+                    }`}
                   >
-                    <input type="checkbox" className="peer hidden" />
-                    <span className="peer-checked:text-[var(--accent-primary)]">
-                      {service}
-                    </span>
+                    <input
+                      type="checkbox"
+                      hidden
+                      onChange={() => toggleService(service)}
+                    />
+                    {service}
                   </label>
                 ))}
               </div>
-            </div>
 
-            {/* MESSAGE */}
-            <textarea
-              rows={4}
-              placeholder="Tell us about your project..."
-              className="w-full resize-none rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[var(--accent-primary)] focus:outline-none"
-            />
-          </form>
-        </div>
+              <textarea
+                name="message"
+                value={form.message}
+                onChange={handleChange}
+                placeholder="Tell us about your project..."
+                className="w-full rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[var(--accent-primary)] focus:outline-none"
+              />
 
-        {/* FOOTER */}
-        <div className="border-t border-white/10 px-6 py-4">
-          <Button type="submit" text="Send Request" />
+              <Button
+                text={loading ? "Sending OTP..." : "Send OTP"}
+                onClick={handleSendOTP}
+              />
+            </>
+          )}
+
+          {/* ================= OTP STEP ================= */}
+          {step === "OTP" && (
+            <>
+              <input
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                placeholder="Enter 6-digit OTP"
+                className="w-full tracking-widest rounded-lg border border-white/10 bg-black/40 px-4 py-3 text-sm text-white placeholder-white/40 focus:border-[var(--accent-primary)] focus:outline-none"
+              />
+
+              <Button
+                text={loading ? "Verifying..." : "Verify OTP"}
+                onClick={handleVerifyOTP}
+              />
+            </>
+          )}
         </div>
       </div>
     </div>

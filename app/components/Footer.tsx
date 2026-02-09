@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 import {
   Facebook,
   Twitter,
@@ -11,20 +14,64 @@ import {
 } from "lucide-react";
 
 export default function Footer() {
+  /* ================= NEWSLETTER STATE ================= */
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"success" | "error" | "info" | "">("");
+
+  /* ================= SUBSCRIBE HANDLER ================= */
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+
+    try {
+      setLoading(true);
+      setMessage("");
+      setStatus("");
+
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE}/subscribers`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        },
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        // already subscribed or validation error
+        setStatus("info");
+        setMessage(data.message || "You are already subscribed.");
+        return;
+      }
+
+      setStatus("success");
+      setMessage("🎉 Successfully subscribed! Thank you.");
+      setEmail("");
+    } catch (error) {
+      setStatus("error");
+      setMessage("Something went wrong. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <footer className="relative overflow-hidden">
       {/* BACKGROUND IMAGE */}
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/footer.png" // <-- your generated image
+          src="/footer.png"
           alt="Dubai skyline at night"
           fill
           className="object-cover"
           priority
         />
-        {/* DARK OVERLAY */}
         <div className="absolute inset-0 bg-black/75" />
-        {/* SOFT GOLD TINT */}
         <div className="absolute inset-0 bg-[var(--bg-primary)]/60" />
       </div>
 
@@ -94,13 +141,13 @@ export default function Footer() {
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="group flex items-center gap-2 text-[var(--text-secondary)] transition hover:text-[var(--accent-primary)]"
+                    className="group flex items-center gap-2 transition hover:text-[var(--accent-primary)]"
                   >
                     <ChevronRight
                       size={14}
-                      className="text-[var(--accent-primary)] opacity-70 transition-transform duration-300 group-hover:translate-x-1"
+                      className="text-[var(--accent-primary)] opacity-70 group-hover:translate-x-1 transition"
                     />
-                    <span>{item.label}</span>
+                    {item.label}
                   </Link>
                 </li>
               ))}
@@ -140,13 +187,13 @@ export default function Footer() {
                 <li key={service.href}>
                   <Link
                     href={service.href}
-                    className="group flex items-center gap-2 text-[var(--text-secondary)] transition hover:text-[var(--accent-primary)]"
+                    className="group flex items-center gap-2 transition hover:text-[var(--accent-primary)]"
                   >
                     <ChevronRight
                       size={14}
-                      className="text-[var(--accent-primary)] opacity-70 transition-transform duration-300 group-hover:translate-x-1"
+                      className="text-[var(--accent-primary)] opacity-70 group-hover:translate-x-1 transition"
                     />
-                    <span>{service.label}</span>
+                    {service.label}
                   </Link>
                 </li>
               ))}
@@ -164,19 +211,42 @@ export default function Footer() {
               Get growth tips, insights & latest updates. No spam.
             </p>
 
-            <form className="flex items-center overflow-hidden rounded-full border border-[var(--border-light)] bg-black/30 backdrop-blur">
+            <form
+              onSubmit={handleSubscribe}
+              className="flex items-center overflow-hidden rounded-full border border-[var(--border-light)] bg-black/30 backdrop-blur"
+            >
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email address"
                 className="w-full bg-transparent px-4 py-3 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)]"
               />
               <button
                 type="submit"
+                disabled={loading}
                 className="flex items-center justify-center bg-[var(--accent-primary)] px-4 py-3 text-black hover:opacity-90 transition"
               >
-                <Send size={16} />
+                {loading ? (
+                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-black border-t-transparent" />
+                ) : (
+                  <Send size={16} className="rotate-45" />
+                )}
               </button>
             </form>
+            {message && (
+              <p
+                className={`mt-3 text-xs ${
+                  status === "success"
+                    ? "text-green-400"
+                    : status === "info"
+                      ? "text-yellow-400"
+                      : "text-red-400"
+                }`}
+              >
+                {message}
+              </p>
+            )}
 
             <p className="mt-4 text-xs text-[var(--text-secondary)]">
               🏆 Award-winning digital agency
