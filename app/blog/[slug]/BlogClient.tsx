@@ -18,6 +18,7 @@ export default function BlogClient({
   relatedBlogs: any[];
 }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [related, setRelated] = useState<any[]>([]);
 
   // ✅ Listen for popup buttons inside blog HTML
   useEffect(() => {
@@ -31,6 +32,27 @@ export default function BlogClient({
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
   }, []);
+
+  useEffect(() => {
+    if (!blog?.slug) return;
+
+    const fetchRelatedBlogs = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE}/blog/related/${blog.slug}`,
+        );
+        const data = await res.json();
+
+        if (Array.isArray(data)) {
+          setRelated(data);
+        }
+      } catch (err) {
+        console.error("Failed to fetch related blogs", err);
+      }
+    };
+
+    fetchRelatedBlogs();
+  }, [blog?.slug]);
 
   return (
     <div className="bg-black text-white min-h-screen">
@@ -77,20 +99,62 @@ export default function BlogClient({
           )}
 
           {/* BLOG CONTENT + SIDEBAR */}
-          <section className="mt-12 grid grid-cols-1 lg:grid-cols-5 gap-10">
+          <section className="mt-12 grid grid-cols-1 lg:grid-cols-5 gap-10 overflow-hidden">
             {/* LEFT – BLOG CONTENT */}
-            <article className="lg:col-span-3">
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-6 md:p-10 shadow-xl">
+            <article className="lg:col-span-3 min-w-0 overflow-hidden">
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-6 md:p-10 shadow-xl min-w-0 overflow-hidden">
                 <div
                   className="blog-content"
                   dangerouslySetInnerHTML={{ __html: blog.content }}
                 />
               </div>
             </article>
-
             {/* RIGHT – SIDEBAR */}
-            <aside className="lg:col-span-2">
+            <aside className="lg:col-span-2 space-y-8">
               <ContactFormCard />
+
+              {/* ================= RELATED BLOGS ================= */}
+              {related.length > 0 && (
+                <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5">
+                  <h3 className="text-lg font-semibold mb-4">
+                    Related Articles
+                  </h3>
+
+                  <div className="space-y-4">
+                    {related.map((item) => (
+                      <Link
+                        key={item.slug}
+                        href={`/blog/${item.slug}`}
+                        className="group block"
+                      >
+                        <div className="flex gap-4">
+                          {/* Thumbnail */}
+                          {item.coverImage && (
+                            <div className="relative w-20 h-16 shrink-0 rounded-lg overflow-hidden border border-white/10">
+                              <Image
+                                src={item.coverImage}
+                                alt={item.coverImageAlt || item.title}
+                                fill
+                                className="object-cover group-hover:scale-105 transition"
+                              />
+                            </div>
+                          )}
+
+                          {/* Content */}
+                          <div>
+                            <p className="text-sm font-medium text-white group-hover:text-[var(--accent-primary)] transition line-clamp-2">
+                              {item.title}
+                            </p>
+                            <p className="text-xs text-gray-400 mt-1">
+                              By {item.author}
+                            </p>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
             </aside>
           </section>
         </div>

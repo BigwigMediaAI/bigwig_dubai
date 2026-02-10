@@ -23,6 +23,7 @@ interface Testimonial {
 export default function Testimonials() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [active, setActive] = useState<Testimonial | null>(null);
+  const [loading, setLoading] = useState(true);
 
   /* ================= FETCH TESTIMONIALS ================= */
   useEffect(() => {
@@ -31,12 +32,16 @@ export default function Testimonials() {
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_API_BASE}/testimonial/public/list`,
         );
-        const data = await res.json();
+        const data: Testimonial[] = await res.json();
 
-        setTestimonials(data);
-        setActive(data[0]);
+        if (Array.isArray(data) && data.length) {
+          setTestimonials(data);
+          setActive(data[0]);
+        }
       } catch (error) {
-        console.error("Failed to load testimonials");
+        console.error("Failed to load testimonials", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -45,12 +50,11 @@ export default function Testimonials() {
 
   /* ================= AUTO ROTATE (DESKTOP) ================= */
   useEffect(() => {
-    if (!testimonials.length) return;
+    if (!testimonials.length || testimonials.length === 1) return;
 
     const interval = setInterval(() => {
       setActive((prev) => {
         if (!prev) return testimonials[0];
-
         const currentIndex = testimonials.findIndex((t) => t._id === prev._id);
         return testimonials[(currentIndex + 1) % testimonials.length];
       });
@@ -58,6 +62,27 @@ export default function Testimonials() {
 
     return () => clearInterval(interval);
   }, [testimonials]);
+
+  /* ================= LOADING STATE ================= */
+  if (loading) {
+    return (
+      <section className="relative bg-black overflow-hidden">
+        <div className="relative z-10 mx-auto w-11/12 md:w-5/6 py-16">
+          <DesktopTestimonialSkeleton />
+
+          <div className="lg:hidden">
+            <Swiper spaceBetween={16} slidesPerView={1.05}>
+              {Array.from({ length: 3 }).map((_, i) => (
+                <SwiperSlide key={i}>
+                  <MobileTestimonialSkeleton />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   if (!active) return null;
 
@@ -98,11 +123,14 @@ export default function Testimonials() {
               const total = testimonials.length;
               const radius = 560;
               const centerY = 460;
+
               const startAngle = -Math.PI * 0.95;
               const endAngle = -Math.PI * 0.05;
 
               const angle =
-                startAngle + (index * (endAngle - startAngle)) / (total - 1);
+                total > 1
+                  ? startAngle + (index * (endAngle - startAngle)) / (total - 1)
+                  : startAngle;
 
               const x = radius * Math.cos(angle);
               const y = radius * Math.sin(angle);
@@ -207,6 +235,55 @@ function MobileTestimonialCard({ item }: { item: Testimonial }) {
 
       <p className="font-semibold text-[var(--text-primary)]">{item.name}</p>
       <p className="text-sm text-[var(--text-muted)]">{item.designation}</p>
+    </div>
+  );
+}
+
+/* ================= SKELETONS ================= */
+
+function DesktopTestimonialSkeleton() {
+  return (
+    <div className="relative hidden lg:flex justify-center">
+      <div className="relative h-[420px] w-[760px] animate-pulse">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/10"
+            style={{
+              transform: `rotate(${i * 30}deg) translateY(-240px)`,
+            }}
+          />
+        ))}
+
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+          <div className="mb-8 h-6 w-6 rounded bg-white/10" />
+          <div className="mb-4 h-6 w-[420px] rounded bg-white/10" />
+          <div className="mb-4 h-6 w-[360px] rounded bg-white/10" />
+          <div className="mb-6 h-4 w-[180px] rounded bg-white/10" />
+          <div className="h-4 w-[120px] rounded bg-white/10" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MobileTestimonialSkeleton() {
+  return (
+    <div className="rounded-2xl border border-[var(--border-light)] bg-[var(--bg-glass)] p-6 backdrop-blur-md animate-pulse">
+      <div className="mx-auto mb-6 h-6 w-6 rounded bg-white/10" />
+
+      <div className="mb-3 h-4 w-full rounded bg-white/10" />
+      <div className="mb-3 h-4 w-[90%] rounded bg-white/10" />
+      <div className="mb-6 h-4 w-[70%] rounded bg-white/10" />
+
+      <div className="mb-4 flex justify-center gap-2">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div key={i} className="h-4 w-4 rounded bg-white/10" />
+        ))}
+      </div>
+
+      <div className="mx-auto mb-2 h-4 w-[140px] rounded bg-white/10" />
+      <div className="mx-auto h-3 w-[100px] rounded bg-white/10" />
     </div>
   );
 }

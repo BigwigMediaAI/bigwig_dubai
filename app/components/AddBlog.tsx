@@ -84,13 +84,26 @@ const AddBlog = ({
     }
   };
 
+  const sanitizeHtml = (html: string) => {
+    return html
+      .replace(/&nbsp;/g, " ")
+      .replace(/<wbr\s*\/?>/gi, "")
+      .replace(/\s+/g, " ");
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
 
     try {
       const blogData = new FormData();
-      Object.entries(formData).forEach(([key, value]) => {
+
+      const cleanedContent = sanitizeHtml(formData.content);
+
+      Object.entries({
+        ...formData,
+        content: cleanedContent,
+      }).forEach(([key, value]) => {
         if (value) blogData.append(key, value as any);
       });
 
@@ -120,12 +133,14 @@ const AddBlog = ({
     toolbar: [
       [{ header: [1, 2, 3, false] }],
       ["bold", "italic", "underline", "strike"],
-      [{ color: [] }, { background: [] }],
       [{ list: "ordered" }, { list: "bullet" }],
       ["blockquote", "code-block"],
       ["link"],
       ["clean"],
     ],
+    clipboard: {
+      matchVisual: false,
+    },
   };
 
   const quillFormats = [
@@ -142,6 +157,13 @@ const AddBlog = ({
     "code-block",
     "link",
   ];
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      document.execCommand("enableObjectResizing", false, "false");
+      document.execCommand("enableInlineTableEditing", false, "false");
+    }
+  }, []);
 
   return (
     <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center px-4">

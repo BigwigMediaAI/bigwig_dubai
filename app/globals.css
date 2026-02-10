@@ -58,21 +58,21 @@
 }
 
 .blog-content h1 {
-  font-size: 2.25rem;
+  font-size: 2rem;
   font-weight: 700;
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
 
 .blog-content h2 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 500;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
 }
 
 .blog-content h3 {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 500;
   margin-top: 1.25rem;
   margin-bottom: 0.5rem;
@@ -81,14 +81,14 @@
 .blog-content p {
   margin-top: 1rem;
   margin-bottom: 1rem;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .blog-content ul,
 .blog-content ol {
   padding-left: 1.5rem;
   margin: 1rem 0;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .blog-content li {
@@ -96,7 +96,7 @@
 }
 
 .blog-content a {
-  color: #b10203; /* Tailwind blue-600 */
+  color: #ede96e;
   text-decoration: none;
 }
 
