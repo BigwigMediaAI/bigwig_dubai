@@ -22,6 +22,8 @@ export default function About() {
         }}
       />
 
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[var(--accent-primary)]/5 via-transparent to-black" />
+
       {/* CONTENT */}
       <div className="relative z-10 mx-auto w-11/12 md:w-5/6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
@@ -33,7 +35,10 @@ export default function About() {
             <div
               data-aos="zoom-in"
               data-aos-delay="200"
-              className="relative overflow-hidden rounded-tl-4xl rounded-br-4xl border border-[var(--border-light)]"
+              className="relative overflow-hidden rounded-tl-[60px] rounded-br-[60px]
+             border border-[var(--border-accent)]
+             bg-gradient-to-br from-black via-[#141414] to-black
+             shadow-[0_25px_80px_rgba(207,174,112,0.25)]"
             >
               <Image
                 src="/about.png"
@@ -42,6 +47,9 @@ export default function About() {
                 height={700}
                 className="object-cover"
               />
+
+              {/* Gold sheen */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-[var(--accent-primary)]/10 to-transparent" />
             </div>
           </div>
 
@@ -76,6 +84,7 @@ export default function About() {
                 Dubai’s Competitive Market
               </span>
             </h2>
+            <div className="my-6 h-[2px] w-24 bg-gradient-to-r from-[var(--accent-primary)] to-transparent rounded-full" />
 
             <p
               data-aos="fade-up"
@@ -96,25 +105,6 @@ export default function About() {
               combine strategy, creativity, and data to deliver measurable
               results — not vanity metrics.
             </p>
-
-            {/* STATS */}
-            {/* <div className="grid grid-cols-2 gap-6 mb-10">
-              {[
-                { value: "250+", label: "Projects Delivered" },
-                { value: "4.9★", label: "Client Satisfaction" },
-                { value: "8+", label: "Years Experience" },
-                { value: "Global", label: "Clients Served" },
-              ].map((item) => (
-                <div key={item.label}>
-                  <p className="text-3xl font-bold text-[var(--accent-primary)]">
-                    {item.value}
-                  </p>
-                  <p className="text-sm text-[var(--text-secondary)]">
-                    {item.label}
-                  </p>
-                </div>
-              ))}
-            </div> */}
 
             {/* CTA */}
             <div data-aos="flip-left" data-aos-delay="700">

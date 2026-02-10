@@ -38,6 +38,10 @@
   }
 }
 
+body {
+  cursor: none;
+}
+
 /* Hide scrollbar but keep scroll functionality */
 .scrollbar-hide {
   overflow: auto;

@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Navbar from "../components/Navbar";
@@ -15,11 +16,43 @@ interface Blog {
   excerpt: string;
   slug: string;
   coverImage: string;
-  createdAt: string;
+  datePublished: string;
 }
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
 const BLOGS_PER_PAGE = 10;
+
+/* ================= SKELETON ================= */
+
+function BlogSkeleton() {
+  return (
+    <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-5 gap-12">
+      {/* LEFT */}
+      <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-8">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div
+            key={i}
+            className="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden animate-pulse"
+          >
+            <div className="h-48 bg-white/10" />
+            <div className="p-6 space-y-3">
+              <div className="h-4 w-3/4 bg-white/10 rounded" />
+              <div className="h-3 w-full bg-white/10 rounded" />
+              <div className="h-3 w-5/6 bg-white/10 rounded" />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* RIGHT */}
+      <div className="lg:col-span-2">
+        <div className="h-[420px] rounded-2xl bg-white/[0.04] border border-white/10 animate-pulse" />
+      </div>
+    </div>
+  );
+}
+
+/* ================= PAGE ================= */
 
 export default function BlogPage() {
   const [open, setOpen] = useState(false);
@@ -97,12 +130,14 @@ export default function BlogPage() {
 
       {/* ================= CONTENT ================= */}
       <section className="relative py-20 overflow-hidden">
-        {/* BACKGROUND GLOW */}
         <div className="absolute inset-0 -z-10">
           <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--accent-primary)]/15 blur-[200px]" />
         </div>
 
-        {/* ================= NO BLOGS ================= */}
+        {/* LOADING */}
+        {loading && <BlogSkeleton />}
+
+        {/* EMPTY */}
         {!loading && blogs.length === 0 && (
           <div className="mx-auto max-w-5xl px-6">
             <div className="relative rounded-3xl border border-white/10 bg-white/[0.02] p-12 text-center backdrop-blur-xl shadow-2xl">
@@ -133,10 +168,10 @@ export default function BlogPage() {
           </div>
         )}
 
-        {/* ================= BLOGS + CONTACT FORM ================= */}
-        {blogs.length > 0 && (
-          <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
-            {/* ================= LEFT : BLOGS ================= */}
+        {/* BLOGS */}
+        {!loading && blogs.length > 0 && (
+          <div className="mx-auto w-11/12 md:w-5/6 grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
+            {/* LEFT */}
             <div className="lg:col-span-3">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {paginatedBlogs.map((blog) => (
@@ -155,7 +190,7 @@ export default function BlogPage() {
                     </div>
 
                     <div className="p-6">
-                      <h3 className="mb-2 text-lg font-semibold text-white group-hover:text-[var(--accent-primary)]">
+                      <h3 className="mb-2 line-clamp-2 text-lg font-semibold text-white group-hover:text-[var(--accent-primary)]">
                         {blog.title}
                       </h3>
 
@@ -164,14 +199,14 @@ export default function BlogPage() {
                       </p>
 
                       <span className="mt-4 block text-xs text-[var(--text-muted)]">
-                        {new Date(blog.createdAt).toLocaleDateString()}
+                        {new Date(blog.datePublished).toLocaleDateString()}
                       </span>
                     </div>
                   </Link>
                 ))}
               </div>
 
-              {/* ================= PAGINATION ================= */}
+              {/* PAGINATION */}
               {totalPages > 1 && (
                 <div className="mt-12 flex justify-center gap-4">
                   <button
@@ -197,7 +232,7 @@ export default function BlogPage() {
               )}
             </div>
 
-            {/* ================= RIGHT : STICKY FORM ================= */}
+            {/* RIGHT */}
             <div className="lg:col-span-2 lg:sticky lg:top-28 self-start">
               <ContactFormCard />
             </div>

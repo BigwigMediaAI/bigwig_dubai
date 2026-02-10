@@ -209,7 +209,7 @@ export default function Services() {
       {/* ===== CONTENT ===== */}
       <div className="relative z-10 mx-auto w-11/12 md:w-5/6">
         {/* HEADER */}
-        <div className="mb-16 max-w-3xl">
+        <div className="mb-10 max-w-3xl">
           <p
             data-aos="zoom-in"
             className="mb-4 inline-block rounded-full border border-[var(--border-light)] px-4 py-1 text-sm text-[var(--text-secondary)]"
@@ -238,6 +238,7 @@ export default function Services() {
               Grow Digitally
             </span>
           </h2>
+          <div className="my-6 h-[2px] w-24 bg-gradient-to-r from-[var(--accent-primary)] to-transparent rounded-full" />
         </div>
 
         {/* ===== GRID ===== */}

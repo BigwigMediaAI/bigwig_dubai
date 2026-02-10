@@ -114,6 +114,7 @@ export default function Testimonials() {
               Demand Real Results
             </span>
           </h2>
+          <div className="mb-6 h-[2px] w-24 bg-gradient-to-r from-[var(--accent-primary)] to-transparent rounded-full" />
         </div>
 
         {/* ================= DESKTOP ARC ================= */}
