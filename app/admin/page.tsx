@@ -3,6 +3,7 @@ import { EarthIcon, Handshake, User2, Users } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { JSX, useEffect, useState } from "react";
 import { FaBook, FaBuilding, FaUser, FaUsers } from "react-icons/fa";
+import LeadGraph from "../components/LeadGraph";
 
 const Dashboard = () => {
   const router = useRouter();
@@ -52,6 +53,9 @@ const Dashboard = () => {
         {cards.map((card) => (
           <StatCard key={card.title} {...card} />
         ))}
+      </div>
+      <div className="mt-10">
+        <LeadGraph />
       </div>
     </section>
   );

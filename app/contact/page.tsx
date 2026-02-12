@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -15,8 +14,8 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { MapPin, Phone, Mail } from "lucide-react";
-import Button from "../components/Button";
 import ContactFormCard from "../components/ContactFormCard";
+import FaqSection from "../components/FaqSection";
 
 const socials = [
   {
@@ -45,40 +44,7 @@ const socials = [
     href: "https://youtube.com",
   },
 ];
-
-const faqs = [
-  {
-    q: "How quickly will you respond?",
-    a: "We typically respond within 24 hours on business days. We typically respond within 24 hours on business days. We typically respond within 24 hours on business days. We typically respond within 24 hours on business days. ",
-  },
-  {
-    q: "Do you work with startups?",
-    a: "Yes, we work with startups, scale-ups, and established brands.",
-  },
-  {
-    q: "Is there a minimum project size?",
-    a: "There is no fixed minimum. We scope projects based on your goals and requirements.",
-  },
-  {
-    q: "Do you offer free consultations?",
-    a: "Yes, the first consultation is completely free and obligation-free.",
-  },
-  {
-    q: "What industries do you specialize in?",
-    a: "We work across real estate, SaaS, e-commerce, professional services, and emerging brands.",
-  },
-  {
-    q: "How do you measure success?",
-    a: "We focus on measurable KPIs such as leads, conversions, ROI, and long-term growth.",
-  },
-  {
-    q: "Will I have a dedicated point of contact?",
-    a: "Yes, you’ll work with a dedicated strategist who understands your business goals.",
-  },
-];
-
 export default function ContactPage() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
   return (
     <div className="relative ">
       {/* NAVBAR */}
@@ -372,19 +338,7 @@ export default function ContactPage() {
                 </span>
               </h2>
 
-              <div className="space-y-3">
-                {faqs.map((item, index) => (
-                  <FAQAccordion
-                    key={index}
-                    question={item.q}
-                    answer={item.a}
-                    isOpen={openIndex === index}
-                    onToggle={() =>
-                      setOpenIndex(openIndex === index ? null : index)
-                    }
-                  />
-                ))}
-              </div>
+              <FaqSection />
             </div>
           </div>
         </div>
@@ -425,110 +379,6 @@ export default function ContactPage() {
       <GlobalCTA />
 
       <Footer />
-    </div>
-  );
-}
-
-type InputProps = {
-  label: string;
-  placeholder?: string;
-};
-
-function Input({ label, placeholder }: InputProps) {
-  return (
-    <div className="relative">
-      <label className="mb-2 block text-sm text-[var(--text-secondary)]">
-        {label}
-      </label>
-
-      <input
-        type="text"
-        placeholder={placeholder}
-        className="
-          w-full
-          rounded-xl
-          border
-          border-[var(--border-light)]
-          bg-black/40
-          px-4
-          py-3
-          text-sm
-          text-[var(--text-primary)]
-          placeholder:text-[var(--text-muted)]
-          focus:outline-none
-          focus:ring-2
-          focus:ring-[var(--accent-primary)]/40
-          focus:border-[var(--accent-primary)]/50
-        "
-      />
-    </div>
-  );
-}
-
-type FAQAccordionProps = {
-  question: string;
-  answer: string;
-  isOpen: boolean;
-  onToggle: () => void;
-};
-
-function FAQAccordion({
-  question,
-  answer,
-  isOpen,
-  onToggle,
-}: FAQAccordionProps) {
-  return (
-    <div
-      className={`rounded-xl border backdrop-blur-md transition-all duration-300 ${
-        isOpen
-          ? "border-[var(--border-accent)] bg-[var(--bg-glass)]"
-          : "border-[var(--border-light)] bg-[var(--bg-glass)]"
-      }`}
-    >
-      <button
-        onClick={onToggle}
-        className="flex w-full items-center justify-between px-5 py-4 text-left"
-      >
-        {/* QUESTION */}
-        <span
-          className={`text-xl transition-colors ${
-            isOpen
-              ? "font-semibold text-[var(--accent-primary)]"
-              : "font-medium text-[var(--text-primary)]"
-          }`}
-        >
-          {question}
-        </span>
-
-        {/* PLUS / MINUS ICON */}
-        <span
-          className={`flex h-7 w-7 items-center justify-center rounded-full border text-lg leading-none transition-all ${
-            isOpen
-              ? "border-[var(--accent-primary)] text-[var(--accent-primary)]"
-              : "border-[var(--border-light)] text-[var(--text-muted)]"
-          }`}
-        >
-          {isOpen ? "–" : "+"}
-        </span>
-      </button>
-
-      {/* ANSWER */}
-      <div
-        className={`grid transition-all duration-300 ease-in-out ${
-          isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-        }`}
-      >
-        <div
-          className={`overflow-hidden px-5 pb-4 transition-colors ${
-            isOpen
-              ? "text-sm  text-[var(--text-secondary)]"
-              : "text-sm text-[var(--text-secondary)]"
-          }`}
-        >
-          {answer}
-        </div>
-      </div>
     </div>
   );
 }

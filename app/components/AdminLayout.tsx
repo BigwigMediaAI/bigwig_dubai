@@ -6,6 +6,7 @@ import {
   FaBuilding,
   FaMailBulk,
   FaQuoteRight,
+  FaQuestion,
 } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -46,6 +47,11 @@ export default function AdminLayout({
       icon: <FaQuoteRight size={18} />,
       label: "Testimonial",
       to: "/admin/testimonial",
+    },
+    {
+      icon: <FaQuestion size={18} />,
+      label: "FAQ",
+      to: "/admin/faq",
     },
   ];
 
