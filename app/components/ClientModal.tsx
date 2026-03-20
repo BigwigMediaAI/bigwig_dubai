@@ -136,7 +136,7 @@ const ClientModal = ({
                     Click to upload client logo
                   </p>
                   <p className="text-xs text-gray-500 mt-1">
-                    PNG, JPG, SVG up to 5MB
+                    PNG, JPG up to 5MB
                   </p>
                 </>
               )}

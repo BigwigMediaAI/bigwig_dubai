@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { ImageIcon, X } from "lucide-react";
-import "react-quill-new/dist/quill.snow.css";
+import "react-quill-new/dist/quill.snow.css"; // ✅ FIXED
 import Button from "./Button";
 
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
@@ -43,6 +43,7 @@ const AddBlog = ({
   const [preview, setPreview] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
+  // ================= LOAD EXISTING =================
   useEffect(() => {
     if (existingBlog) {
       setFormData({
@@ -55,9 +56,14 @@ const AddBlog = ({
         coverImageAlt: existingBlog.coverImageAlt || "",
         coverImage: null,
       });
+
+      if (existingBlog.coverImage) {
+        setPreview(existingBlog.coverImage);
+      }
     }
   }, [existingBlog]);
 
+  // ================= INPUT =================
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -76,6 +82,7 @@ const AddBlog = ({
     }
   };
 
+  // ================= IMAGE =================
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
       const file = e.target.files[0];
@@ -84,15 +91,19 @@ const AddBlog = ({
     }
   };
 
+  // ================= SANITIZE =================
   const sanitizeHtml = (html: string) => {
     return html
       .replace(/&nbsp;/g, " ")
       .replace(/<wbr\s*\/?>/gi, "")
-      .replace(/\s+/g, " ");
+      .trim();
   };
 
+  // ================= SUBMIT =================
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (submitting) return;
     setSubmitting(true);
 
     try {
@@ -104,7 +115,9 @@ const AddBlog = ({
         ...formData,
         content: cleanedContent,
       }).forEach(([key, value]) => {
-        if (value) blogData.append(key, value as any);
+        if (value !== null && value !== "") {
+          blogData.append(key, value as any);
+        }
       });
 
       const res = await fetch(
@@ -123,12 +136,14 @@ const AddBlog = ({
       onSuccess();
       onClose();
     } catch (err) {
+      console.error(err);
       alert("Something went wrong");
     } finally {
       setSubmitting(false);
     }
   };
 
+  // ================= QUILL =================
   const quillModules = {
     toolbar: [
       [{ header: [1, 2, 3, false] }],
@@ -151,13 +166,13 @@ const AddBlog = ({
     "strike",
     "color",
     "background",
-    "list",
-    "bullet",
+    "list", // ✅ FIXED (removed bullet)
     "blockquote",
     "code-block",
     "link",
   ];
 
+  // ================= DISABLE WARNINGS =================
   useEffect(() => {
     if (typeof window !== "undefined") {
       document.execCommand("enableObjectResizing", false, "false");
@@ -168,7 +183,7 @@ const AddBlog = ({
   return (
     <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center px-4">
       <div className="bg-[#111] text-white w-full max-w-3xl rounded-2xl shadow-2xl border border-gray-700 flex flex-col max-h-[95vh] overflow-hidden">
-        {/* ================= HEADER ================= */}
+        {/* HEADER */}
         <div className="flex items-start justify-between px-6 py-4 border-b border-gray-700">
           <div>
             <h2 className="text-lg font-semibold">
@@ -186,12 +201,12 @@ const AddBlog = ({
           </button>
         </div>
 
-        {/* ================= BODY ================= */}
+        {/* BODY */}
         <form
           onSubmit={handleSubmit}
           className="flex-1 overflow-y-auto px-6 py-5 space-y-8"
         >
-          {/* BASIC INFO */}
+          {/* BASIC */}
           <section className="space-y-4">
             <h3 className="text-xs uppercase text-gray-400 tracking-wide">
               Basic Information
@@ -233,17 +248,21 @@ const AddBlog = ({
             </h3>
 
             <div className="border border-gray-700 rounded-xl bg-black overflow-hidden">
-              <ReactQuill
-                theme="snow"
-                value={formData.content}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, content: value }))
-                }
-                modules={quillModules}
-                formats={quillFormats}
-                placeholder="Write your blog content here..."
-                className="newsletter-editor scrollbar-hide"
-              />
+              <div className="h-[224px] overflow-y-auto">
+                {" "}
+                {/* ✅ FIXED HEIGHT */}
+                <ReactQuill
+                  theme="snow"
+                  value={formData.content}
+                  onChange={(value) =>
+                    setFormData((prev) => ({ ...prev, content: value }))
+                  }
+                  modules={quillModules}
+                  formats={quillFormats}
+                  placeholder="Write your blog content here..."
+                  className="newsletter-editor"
+                />
+              </div>
             </div>
           </section>
 
@@ -275,7 +294,7 @@ const AddBlog = ({
             />
           </section>
 
-          {/* IMAGE UPLOAD */}
+          {/* IMAGE */}
           <section>
             <label className="text-xs uppercase text-gray-400 tracking-wide mb-2 block">
               Cover Image
@@ -283,16 +302,7 @@ const AddBlog = ({
 
             <label
               htmlFor="cover-image"
-              className="
-              flex flex-col items-center justify-center
-              w-full h-44
-              border-2 border-dashed border-gray-700
-              rounded-xl
-              cursor-pointer
-              bg-black
-              hover:border-gray-500
-              transition
-            "
+              className="flex flex-col items-center justify-center w-full h-44 border-2 border-dashed border-gray-700 rounded-xl cursor-pointer bg-black hover:border-gray-500 transition"
             >
               {preview ? (
                 <img
@@ -321,35 +331,34 @@ const AddBlog = ({
               />
             </label>
           </section>
+
+          {/* FOOTER */}
+          <div className="border-t border-gray-700 px-6 py-4 flex justify-end gap-3">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-4 py-2 rounded-lg border border-gray-700 text-gray-300 hover:text-white hover:border-gray-500"
+            >
+              Cancel
+            </button>
+
+            <Button
+              type="submit"
+              text={
+                submitting
+                  ? existingBlog
+                    ? "Updating..."
+                    : "Publishing..."
+                  : existingBlog
+                    ? "Update Blog"
+                    : "Publish Blog"
+              }
+            />
+          </div>
         </form>
-
-        {/* ================= FOOTER ================= */}
-        <div className="border-t border-gray-700 px-6 py-4 flex justify-end gap-3">
-          <button
-            type="button"
-            onClick={onClose}
-            className="px-4 py-2 rounded-lg border border-gray-700 text-gray-300 hover:text-white hover:border-gray-500"
-          >
-            Cancel
-          </button>
-
-          <Button
-            type="submit"
-            onClick={handleSubmit}
-            text={
-              submitting
-                ? existingBlog
-                  ? "Updating..."
-                  : "Publishing..."
-                : existingBlog
-                  ? "Update Blog"
-                  : "Publish Blog"
-            }
-          />
-        </div>
       </div>
     </div>
   );
 };
-// ABC
+
 export default AddBlog;
