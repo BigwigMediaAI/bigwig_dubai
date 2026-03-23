@@ -50,11 +50,12 @@ export default function AboutPage() {
             <h1
               data-aos="fade-right"
               data-aos-delay="50"
-              className="mb-6 text-4xl md:text-6xl font-bold leading-tight text-[var(--text-primary)]"
+              className="mb-6 text-4xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]"
             >
-              Building Digital Brands <br />
+              Dubai-Focused Digital Marketing Agency
+              <br />
               <span className="text-[var(--accent-primary)]">
-                That Lead Markets
+                That Drives Real Business Growth
               </span>
             </h1>
             {/* SUBTEXT */}
@@ -67,6 +68,13 @@ export default function AboutPage() {
               ambitious brands grow, scale, and dominate competitive markets
               like Dubai through strategy, creativity, and technology.
             </p>
+            <div className="mt-6 flex flex-wrap gap-4 text-sm text-[var(--text-secondary)]">
+              <span>⭐ 5.0 Client Satisfaction </span>
+              <span>|</span>
+              <span>Trusted by UAE Brands </span>
+              <span>|</span>
+              <span>Performance-Driven Strategy</span>
+            </div>
           </div>
         </div>
       </section>
@@ -83,7 +91,7 @@ export default function AboutPage() {
         />
 
         <div className="relative z-10 mx-auto w-11/12 md:w-5/6 py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             {/* ================= LEFT CONTENT (STICKY) ================= */}
             <div className="lg:sticky lg:top-32 self-start">
               <p
@@ -176,7 +184,6 @@ export default function AboutPage() {
                   title="A True Extension of Your Team"
                   text="We work closely with internal teams, aligning goals, processes, and execution to achieve long-term success."
                   icon="collaborate"
-                  cta
                 />
               </div>
             </div>

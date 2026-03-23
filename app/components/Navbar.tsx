@@ -6,6 +6,8 @@ import Image from "next/image";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Button from "../components/Button";
 import ServicePopup from "./Popup";
+import { BsWhatsapp } from "react-icons/bs";
+import LanguageSelector from "./LanguageSelector";
 
 const services = [
   {
@@ -30,6 +32,20 @@ const services = [
   },
 ];
 
+declare global {
+  interface Window {
+    googleTranslateElementInit: () => void;
+    google: {
+      translate: {
+        TranslateElement: new (
+          options: { pageLanguage: string; autoDisplay?: boolean },
+          elementId: string,
+        ) => void;
+      };
+    };
+  }
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -40,6 +56,30 @@ export default function Navbar() {
     const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const googleTranslateElementInit = () => {
+      new window.google.translate.TranslateElement(
+        {
+          pageLanguage: "en",
+          autoDisplay: false,
+        },
+        "google_translate_element",
+      );
+    };
+    const loadGoogleTranslateScript = () => {
+      if (!window.googleTranslateElementInit) {
+        const script = document.createElement("script");
+        script.src =
+          "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+        script.async = true;
+        document.body.appendChild(script);
+        window.googleTranslateElementInit = googleTranslateElementInit;
+      }
+    };
+
+    loadGoogleTranslateScript();
   }, []);
 
   return (
@@ -176,18 +216,35 @@ export default function Navbar() {
           </div>
 
           {/* RIGHT: CTA (auto width) */}
-          <div className="hidden lg:flex">
+          <div className="hidden lg:flex items-center gap-4">
+            <div className="notranslate">
+              <LanguageSelector />
+            </div>
+            {/* WhatsApp */}
+            <button
+              onClick={() => window.open("https://wa.me/97112341234")}
+              className="text-sm font-medium text-green-400 hover:text-green-300 transition"
+            >
+              <BsWhatsapp size={24} />
+            </button>
+
+            {/* Main CTA */}
             <Button onClick={() => setOpen(true)} text="Get In Touch" />
           </div>
 
-          {/* MOBILE MENU BUTTON */}
-          <button
-            className="lg:hidden justify-self-end text-[var(--text-primary)]"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle Menu"
-          >
-            {menuOpen ? <X size={26} /> : <Menu size={26} />}
-          </button>
+          <div className="lg:hidden justify-self-end flex gap-4">
+            <div className=" notranslate">
+              <LanguageSelector />
+            </div>
+            {/* MOBILE MENU BUTTON */}
+            <button
+              className=" text-[var(--text-primary)]"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle Menu"
+            >
+              {menuOpen ? <X size={26} /> : <Menu size={26} />}
+            </button>
+          </div>
         </nav>
       </div>
 

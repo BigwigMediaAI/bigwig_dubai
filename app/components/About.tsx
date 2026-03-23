@@ -113,6 +113,33 @@ export default function About() {
           </div>
         </div>
       </div>
+
+      {/* TRUST STRIP */}
+      <div className="relative z-10 mx-auto w-11/12 md:w-5/6 mt-10">
+        <div className="flex flex-wrap items-center justify-center gap-6 rounded-xl border border-[var(--border-light)] bg-white/5 backdrop-blur-md px-6 py-4 text-sm text-[var(--text-secondary)]">
+          <span className="flex items-center gap-2">
+            ⭐ <span>Trusted by UAE Brands</span>
+          </span>
+
+          <span className="hidden md:block w-[1px] h-4 bg-white/20" />
+
+          <span className="flex items-center gap-2">
+            📈 <span>Performance-Driven Strategies</span>
+          </span>
+
+          <span className="hidden md:block w-[1px] h-4 bg-white/20" />
+
+          <span className="flex items-center gap-2">
+            🚀 <span>ROI Focused Campaigns</span>
+          </span>
+
+          <span className="hidden md:block w-[1px] h-4 bg-white/20" />
+
+          <span className="flex items-center gap-2">
+            🏆 <span>5.0 Client Satisfaction</span>
+          </span>
+        </div>
+      </div>
     </section>
   );
 }
