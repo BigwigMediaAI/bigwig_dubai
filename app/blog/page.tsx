@@ -92,19 +92,25 @@ export default function BlogPage() {
       <Navbar />
 
       {/* ================= HERO ================= */}
-      <section className="relative h-[90vh] w-full overflow-hidden">
+      <section className="relative h-[100vh] w-full overflow-hidden">
         <Image
           src="/aboutpage.png"
-          alt="Insights & digital growth stories"
+          alt="Digital marketing insights Dubai"
           fill
           priority
           className="object-cover"
         />
+
+        {/* Overlay */}
         <div className="absolute inset-0 bg-black/80" />
+
+        {/* Glow */}
         <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--accent-primary)]/20 blur-[200px]" />
 
+        {/* Content */}
         <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6">
           <div className="max-w-3xl">
+            {/* Breadcrumb */}
             <div className="mb-4 flex items-center gap-2 text-sm text-[var(--text-muted)]">
               <Link href="/" className="hover:text-[var(--accent-primary)]">
                 Home
@@ -113,17 +119,35 @@ export default function BlogPage() {
               <span className="text-[var(--text-secondary)]">Blog</span>
             </div>
 
-            <h1 className="mb-6 text-4xl md:text-6xl font-bold text-[var(--text-primary)]">
-              Insights, Ideas & <br />
+            {/* Heading */}
+            <h1 className="mb-6 text-4xl md:text-5xl font-bold text-[var(--text-primary)] leading-tight">
+              Digital Marketing Insights <br />
               <span className="text-[var(--accent-primary)]">
-                Digital Growth Stories
+                That Drive Real Growth
               </span>
             </h1>
 
+            {/* Subtext */}
             <p className="max-w-xl text-lg text-[var(--text-secondary)]">
-              Expert perspectives on digital marketing, branding, SEO and
-              performance-driven growth.
+              Learn proven strategies, trends, and insights to grow your
+              business in Dubai’s competitive digital landscape — from SEO and
+              ads to conversion optimization.
             </p>
+
+            {/* 🔥 TRUST BADGES */}
+            <div className="mt-6 flex flex-wrap gap-4 text-sm text-[var(--text-secondary)]">
+              <span>📈 Growth-Focused Insights</span>
+              <span>🚀 Real Case Studies</span>
+              <span>💡 Actionable Strategies</span>
+            </div>
+
+            {/* 🔥 CTA */}
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Button
+                onClick={() => setOpen(true)}
+                text="Get Free Marketing Audit"
+              />
+            </div>
           </div>
         </div>
       </section>

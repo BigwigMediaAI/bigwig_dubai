@@ -18,7 +18,7 @@ export default function AboutPage() {
       {/* NAVBAR */}
       <Navbar />
       {/* HERO SECTION */}
-      <section className="relative h-[90vh] w-full overflow-hidden">
+      <section className="relative h-[100vh] w-full overflow-hidden">
         {/* BACKGROUND IMAGE */}
         <Image
           src="/aboutpage.png"
@@ -52,10 +52,10 @@ export default function AboutPage() {
               data-aos-delay="50"
               className="mb-6 text-4xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]"
             >
-              Dubai-Focused Digital Marketing Agency
+              Digital Marketing Agency
               <br />
               <span className="text-[var(--accent-primary)]">
-                That Drives Real Business Growth
+                Driving Real Growth
               </span>
             </h1>
             {/* SUBTEXT */}
@@ -74,6 +74,9 @@ export default function AboutPage() {
               <span>Trusted by UAE Brands </span>
               <span>|</span>
               <span>Performance-Driven Strategy</span>
+            </div>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Button onClick={() => setOpen(true)} text="Get Free Strategy" />
             </div>
           </div>
         </div>

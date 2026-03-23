@@ -16,6 +16,8 @@ import {
 import { MapPin, Phone, Mail } from "lucide-react";
 import ContactFormCard from "../components/ContactFormCard";
 import FaqSection from "../components/FaqSection";
+import Button from "../components/Button";
+import ServicePopup from "../components/Popup";
 
 const socials = [
   {
@@ -45,23 +47,24 @@ const socials = [
   },
 ];
 export default function ContactPage() {
+  const [open, setOpen] = useState(false);
   return (
     <div className="relative ">
       {/* NAVBAR */}
       <Navbar />
 
       {/* HERO SECTION */}
-      <section className="relative h-[90vh] w-full overflow-hidden">
+      <section className="relative h-[100vh] w-full overflow-hidden">
         {/* BACKGROUND IMAGE */}
         <Image
           src="/aboutpage.png"
-          alt="Dubai skyline digital future"
+          alt="Contact digital marketing agency Dubai"
           fill
           priority
           className="object-cover"
         />
 
-        {/* DARK OVERLAY FOR READABILITY */}
+        {/* OVERLAY */}
         <div className="absolute inset-0 bg-black/80" />
 
         {/* GOLD GLOW */}
@@ -72,35 +75,42 @@ export default function ContactPage() {
           <div className="max-w-3xl">
             {/* BREADCRUMB */}
             <div className="mb-4 flex items-center gap-2 text-sm text-[var(--text-muted)]">
-              <span className="hover:text-[var(--accent-primary)] transition cursor-pointer">
-                <Link href="/">Home</Link>
-              </span>
+              <Link
+                href="/"
+                className="hover:text-[var(--accent-primary)] transition"
+              >
+                Home
+              </Link>
               <span>/</span>
               <span className="text-[var(--text-secondary)]">Contact Us</span>
             </div>
 
-            {/* TITLE */}
-            <h2
-              data-aos="fade-right"
-              data-aos-delay="200"
-              className="mb-6 text-4xl md:text-6xl font-bold leading-tight text-[var(--text-primary)]"
-            >
-              Let’s Start a <br />
+            {/* HEADING */}
+            <h1 className="mb-6 text-4xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]">
+              Let’s Grow Your Business <br />
               <span className="text-[var(--accent-primary)]">
-                Meaningful Conversation
+                with the Right Strategy
               </span>
-            </h2>
+            </h1>
 
             {/* SUBTEXT */}
-            <p
-              data-aos="fade-right"
-              data-aos-delay="400"
-              className="max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]"
-            >
-              Tell us about your goals, challenges, or ideas. Our team will get
-              back to you with clarity, strategy, and next steps tailored to
-              your business.
+            <p className="max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]">
+              Share your goals and challenges with us — we’ll provide a clear,
+              data-driven strategy to help you generate leads, increase revenue,
+              and scale your business in Dubai.
             </p>
+
+            {/* 🔥 TRUST BADGES */}
+            <div className="mt-6 flex flex-wrap gap-4 text-sm text-[var(--text-secondary)]">
+              <span>⚡ Fast Response</span>
+              <span>📈 ROI-Focused Strategy</span>
+              <span>🤝 Trusted by UAE Brands</span>
+            </div>
+
+            {/* 🔥 CTA */}
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Button onClick={() => setOpen(true)} text="Get Free Strategy" />
+            </div>
           </div>
         </div>
       </section>
@@ -379,6 +389,7 @@ export default function ContactPage() {
       <GlobalCTA />
 
       <Footer />
+      <ServicePopup isOpen={open} onClose={() => setOpen(false)} />
     </div>
   );
 }

@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 
 import Image from "next/image";
 import Navbar from "../components/Navbar";
@@ -7,74 +6,87 @@ import Footer from "../components/Footer";
 import Link from "next/link";
 import GlobalCTA from "../components/Cta";
 import Services from "../components/Services";
+import Button from "../components/Button";
+import { useState } from "react";
+import ServicePopup from "../components/Popup";
 
 export default function ServicePage() {
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="relative bg-black">
-      {/* NAVBAR */}
       <Navbar />
 
       {/* HERO SECTION */}
-      <section className="relative h-[90vh] w-full overflow-hidden">
-        {/* BACKGROUND IMAGE */}
+      <section className="relative h-[100vh] w-full overflow-hidden">
         <Image
           src="/aboutpage.png"
-          alt="Trusted clients and brand partnerships"
+          alt="Digital marketing services in Dubai"
           fill
           priority
           className="object-cover"
         />
 
-        {/* DARK OVERLAY FOR READABILITY */}
         <div className="absolute inset-0 bg-black/80" />
 
-        {/* GOLD GLOW */}
         <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--accent-primary)]/20 blur-[200px]" />
 
-        {/* CONTENT */}
         <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6">
           <div className="max-w-3xl">
             {/* BREADCRUMB */}
             <div className="mb-4 flex items-center gap-2 text-sm text-[var(--text-muted)]">
-              <span className="hover:text-[var(--accent-primary)] transition cursor-pointer">
-                <Link href="/">Home</Link>
-              </span>
+              <Link
+                href="/"
+                className="hover:text-[var(--accent-primary)] transition"
+              >
+                Home
+              </Link>
               <span>/</span>
               <span className="text-[var(--text-secondary)]">Services</span>
             </div>
 
             {/* TITLE */}
-            <h1
-              data-aos="fade-right"
-              data-aos-delay="100"
-              className="mb-6 text-4xl md:text-6xl font-bold leading-tight text-[var(--text-primary)]"
-            >
-              Digital Solutions That <br />
+            <h1 className="mb-6 text-4xl md:text-5xl font-bold leading-tight text-[var(--text-primary)]">
+              Performance-Driven Digital Services <br />
               <span className="text-[var(--accent-primary)]">
-                Drive Real Business Growth
+                That Generate Real ROI
               </span>
             </h1>
 
             {/* SUBTEXT */}
-            <p
-              data-aos="fade-right"
-              data-aos-delay="300"
-              className="max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]"
-            >
-              We deliver end-to-end digital services — from strategy and
-              branding to performance marketing and web development — designed
-              to attract, convert, and scale your business in competitive
-              markets.
+            <p className="max-w-xl text-lg leading-relaxed text-[var(--text-secondary)]">
+              We help Dubai businesses generate leads, increase revenue, and
+              scale faster through SEO, paid ads, social media, and web
+              development.
             </p>
+
+            {/* 🔥 TRUST BADGES */}
+            <div className="mt-6 flex flex-wrap gap-4 text-sm text-[var(--text-secondary)]">
+              <span>⭐ 5.0 Client Satisfaction</span>
+              <span>Trusted by UAE Brands</span>
+              <span>ROI-Focused Strategies</span>
+            </div>
+
+            {/* 🔥 CTA BUTTONS */}
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Button
+                text="Get Free Marketing Audit"
+                onClick={() => setOpen(true)}
+              />
+            </div>
           </div>
         </div>
       </section>
 
+      {/* MAIN SERVICES */}
       <Services />
 
+      {/* CTA */}
       <GlobalCTA />
 
       <Footer />
+
+      <ServicePopup isOpen={open} onClose={() => setOpen(false)} />
     </div>
   );
 }
