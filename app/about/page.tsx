@@ -587,7 +587,7 @@ function ProcessStep({ number, title, text, icon }: ProcessStepProps) {
       </div>
 
       {/* CARD */}
-      <div className="rounded-xl border border-[var(--border-light)] bg-[var(--bg-glass)] p-6 backdrop-blur-md transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_0_40px_var(--accent-glow)]">
+      <div className=" min-h-48 rounded-xl border border-[var(--border-light)] bg-[var(--bg-glass)] p-6 backdrop-blur-md transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_0_40px_var(--accent-glow)]">
         <h3 className="mb-3 text-xl font-semibold text-[var(--text-primary)]">
           {title}
         </h3>
